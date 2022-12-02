@@ -75,11 +75,9 @@
           <img src="/admin/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">here was a name</a>
+          <a href="#" class="d-block">{{ Auth::user()->name }}</a>
         </div>
       </div>
-
-      
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">
@@ -88,7 +86,7 @@
                with font-awesome or any other icon font library -->
           
               <li id="showEmployeesTable" class="nav-item">
-              <a href="#" class="nav-link" >
+              <a href="{{ route('employees.index') }}" class="nav-link" >
                 <i class="fas fa-circle nav-icon"></i>
                 <p>
                   Employees
@@ -149,7 +147,7 @@
 </div>
 
 <!-- ./wrapper -->
-<script src="/index.js"></script>
+<!-- <script src="/index.js"></script> -->
 <!-- REQUIRED SCRIPTS -->
 <!-- jQuery -->
 <script src="/admin/plugins/jquery/jquery.min.js"></script>

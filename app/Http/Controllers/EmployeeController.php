@@ -14,7 +14,7 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.employees.index');
     }
 
     /**
@@ -58,7 +58,7 @@ class EmployeeController extends Controller
     public function edit($id)
     {
         $employee = Employee::findOrFail($id);
-        return view('admin.employee.edit', ['employee' => $employee]);
+        return view('admin.employees.edit', ['employee' => $employee]);
     }
 
     /**
