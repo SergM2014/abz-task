@@ -25,6 +25,8 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->float('salary', 6, 3);
             $table->string('photo')->nullable();
+            $table->integer('admin_created_id')->nullable();
+            $table->integer('admin_updated_id')->nullable();
             $table->timestamps();
             $table->index(['first_name', 'last_name']);
         });

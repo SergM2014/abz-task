@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('qualification_code');
             $table->string('title');
             $table->text('description');
+            $table->integer('admin_created_id')->nullable();
+            $table->integer('admin_updated_id')->nullable();
             $table->timestamps();
         });
     }
