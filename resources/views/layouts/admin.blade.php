@@ -18,7 +18,7 @@
   <!-- Datatable-->
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
 
-  
+  @livewireStyles
 
 </head>
 <body class="hold-transition  sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
@@ -160,5 +160,7 @@
 <!-- <script src="dist/js/demo.js"></script> -->
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="admin/dist/js/pages/dashboard2.js"></script>
+
+@livewireScripts
 </body>
 </html>
