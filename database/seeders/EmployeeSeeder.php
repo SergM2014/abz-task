@@ -16,9 +16,9 @@ class EmployeeSeeder extends Seeder
     public function run()
     {
         Employee::factory()->create();
-        Employee::factory()->count(5) ->viceDirector()->create();
-        Employee::factory()->count(10)->teamLeader()->create();
-        Employee::factory()->count(20)->supervisor()->create();
-        Employee::factory()->count(40)->employee()->create();
+        Employee::factory()->count(20) ->viceDirector()->create();
+        Employee::factory()->count(1000)->teamLeader()->create();
+        Employee::factory()->count(5000)->supervisor()->create();
+        Employee::factory()->count(45000)->employee()->create();
     }
 }
