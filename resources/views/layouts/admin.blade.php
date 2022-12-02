@@ -39,9 +39,6 @@
       <li class="nav-item d-none d-sm-inline-block">
         <a href="/" class="nav-link">Home</a>
       </li>
-      <!-- <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Contact</a>
-      </li> -->
     </ul>
 
     <!-- Right navbar links -->
@@ -93,19 +90,19 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           
-              <li id="showUsersTable" class="nav-item">
+              <li id="showEmployeesTable" class="nav-item">
               <a href="#" class="nav-link" >
                 <i class="fas fa-circle nav-icon"></i>
                 <p>
-                  Users
+                  Employees
                 </p>
               </a>
             </li>
-            <li id="showSessionsTable" class="nav-item">
+            <li id="showPositionsTable" class="nav-item">
               <a href="#" class="nav-link" >
                 <i class="fas fa-circle nav-icon"></i>
                 <p>
-                  Sessions
+                  Positions
                 </p>
               </a>
             </li>
