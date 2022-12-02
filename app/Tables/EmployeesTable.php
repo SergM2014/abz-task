@@ -16,7 +16,7 @@ class EmployeesTable extends AbstractTableConfiguration
     {
         return Table::make()->model(Employee::class)
             ->rowActions(fn(Employee $employee) => [
-              //  new EditRowAction(route('employee.edit', $employee)),
+                new EditRowAction(route('employees.edit', $employee)),
                 new DestroyRowAction(),
             ]);
     }

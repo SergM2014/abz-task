@@ -35,7 +35,7 @@
           </div>
         </div>
         <div class="card-body p-0">
-        <livewire:table :config="App\Tables\EmployeesTable::class"/>
+          <livewire:table :config="App\Tables\EmployeesTable::class"/>
         </div>
         <!-- /.card-body -->
       </div>
@@ -53,7 +53,7 @@
           </div>
         </div>
         <div class="card-body p-0">
-          <table id="positionsTable" class="table table-striped projects">
+          <!-- <table id="positionsTable" class="table table-striped projects">
               <thead>
                   <tr>
                       <!-- <th style="width: 1%" class="text-center">
@@ -83,7 +83,7 @@
               <tbody>
               
               </tbody>
-          </table>
+          </table> -->
         </div>
         <!-- /.card-body -->
       </div>
