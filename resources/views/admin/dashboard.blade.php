@@ -35,31 +35,7 @@
           </div>
         </div>
         <div class="card-body p-0">
-          <table id="employeesTable" class="table table-striped projects">
-              <thead>
-                  <tr>
-                      <!-- <th style="width: 1%" class="text-center">
-                          #
-                      </th> -->
-                      <th style="width: 10%" class="text-center">
-                        Id 
-                      </th>
-                      <th style="width: 20%" class="text-center">
-                          Name
-                      </th>
-                      <th style="width: 30%" class="text-center">
-                          Email
-                      </th>
-                     
-                      <th style="width: 20%" class="text-center">
-                        Action
-                      </th>
-                  </tr>
-              </thead>
-              <tbody>
-              
-              </tbody>
-          </table>
+        <livewire:table :config="App\Tables\EmployeesTable::class"/>
         </div>
         <!-- /.card-body -->
       </div>
@@ -77,7 +53,7 @@
           </div>
         </div>
         <div class="card-body p-0">
-          <table id="employeesTable" class="table table-striped projects">
+          <table id="positionsTable" class="table table-striped projects">
               <thead>
                   <tr>
                       <!-- <th style="width: 1%" class="text-center">

@@ -28,7 +28,7 @@ return new class extends Migration
             $table->integer('admin_created_id')->nullable();
             $table->integer('admin_updated_id')->nullable();
             $table->timestamps();
-            $table->index(['first_name', 'last_name']);
+            $table->index(['first_name', 'middle_name', 'last_name']);
         });
     }
 
