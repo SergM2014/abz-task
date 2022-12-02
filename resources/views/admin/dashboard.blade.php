@@ -23,7 +23,7 @@
 
     <!-- Main content -->
     <section class="content">
-      <div  id="usersCard" class="card d-none ">
+      <div  id="employeesCard" class="card d-none ">
         <div class="card-header">
           <h3 class="card-title">Users</h3>
 
@@ -35,7 +35,7 @@
           </div>
         </div>
         <div class="card-body p-0">
-          <table id="usersTable" class="table table-striped projects">
+          <table id="employeesTable" class="table table-striped projects">
               <thead>
                   <tr>
                       <!-- <th style="width: 1%" class="text-center">
@@ -65,9 +65,9 @@
       </div>
       <!-- /.card -->
 
-      <div  id="sessionsCard" class="card d-none">
+      <div  id="positionsCard" class="card d-none">
         <div class="card-header">
-          <h3 class="card-title">Sessions</h3>
+          <h3 class="card-title">Positions</h3>
 
           <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -77,7 +77,7 @@
           </div>
         </div>
         <div class="card-body p-0">
-          <table id="sessionsTable" class="table table-striped projects">
+          <table id="employeesTable" class="table table-striped projects">
               <thead>
                   <tr>
                       <!-- <th style="width: 1%" class="text-center">

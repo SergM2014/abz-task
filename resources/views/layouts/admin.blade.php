@@ -132,7 +132,7 @@
 </div>
 
 <!-- ./wrapper -->
-<!-- <script src="index.js"></script> -->
+<script src="index.js"></script>
 <!-- REQUIRED SCRIPTS -->
 <!-- jQuery -->
 <script src="admin/plugins/jquery/jquery.min.js"></script>
