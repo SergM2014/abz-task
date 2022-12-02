@@ -130,14 +130,6 @@
     </div>
     <!-- /.content-header -->
 
-    <!-- Main content -->
-    <section class="content">
-      <h2>qqqqqqqqqqwwwerty</h2>
-    </section>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
-
   @yield('content')
 
    <!-- Control Sidebar -->

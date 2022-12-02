@@ -36,9 +36,9 @@
           <!-- <table id="positionsTable" class="table table-striped projects">
               <thead>
                   <tr>
-                      <!-- <th style="width: 1%" class="text-center">
+                       <th style="width: 1%" class="text-center">
                           #
-                      </th> -->
+                      </th> 
                       <th style="width: 10%" class="text-center">
                         Id 
                       </th>
