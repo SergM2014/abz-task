@@ -23,7 +23,7 @@
   
   <div class="form-group">
     <label for="positionId">Position select</label>
-    <select class="form-control" id="positionId">
+    <select class="form-control" id="positionId" reqired>
       @foreach  ($positions as $position)
       <option value= "{{ $position->id }}" >{{ $position->title }}</option>
       @endforeach
@@ -31,16 +31,8 @@
     </select>
   </div>
   <div class="form-group">
-    <!-- 
-    <select class="form-control" id="leaderId">
-      <option>1</option>
-      <option>2</option>
-      <option>3</option>
-      <option>4</option>
-      <option>5</option>
-    </select> -->
     <label for="leaderId">Leader select</label>
-    <select name="leaderId" id="leaderIdSelect" class="form-control select2"></select>
+    <select name="leaderId" id="leaderIdSelect" class="form-control select2" required></select>
   </div>
   <div class="form-group">
     <label for="phone">Phone</label>
@@ -48,12 +40,21 @@
     <smal>Put phone only in following formats: +38(066)1234567 +38(0661)123456 +38(06612)12345 1234567</smal>
     </div>
     <input type="tel" class="form-control" name="phone" id="phone" placeholder="Phone"
-    pattern="([\+]\d{2}[\(]\d{3}[\)]\d{7})|([\+]\d{2}[\(]\d{4}[\)]\d{6})|([\+]\d{2}[\(]\d{5}[\)]\d{5})|\d{10}"
-    required >
+     pattern="([\+]\d{2}[\(]\d{3}[\)]\d{7})|([\+]\d{2}[\(]\d{4}[\)]\d{6})|([\+]\d{2}[\(]\d{5}[\)]\d{5})|\d{10}"
+     required >
+  </div>
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input type="email" class="form-control" name="email" id="email" placeholder="email"
+     required  >
   </div>
   <div class="form-group">
     <label for="salary">Salary</label>
-    <input type="text" class="form-control" name="salary" id="salary" placeholder="Salary" required >
+    <div class="text-red">
+    <smal>if sum is decimal, use  delimeter -comma, after comma 3 numbers are allowed. the max sum is 500,000 </smal>
+    </div>
+    <input type="number" class="form-control" name="salary" id="salary" placeholder="Salary" 
+    step="0.001" min="0" max="500" >
   </div>
   <div class="form-group">
     <label for="photo">Photo</label>
