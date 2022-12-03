@@ -17,14 +17,14 @@
   <div class="form-group">
     <label for="middleName">Middle Name</label>
     <input type="text" class="form-control <?= $errors->has('middleName')? 'is-invalid' : '' ?>" 
-    name="middleName" id="middleName" placeholder="Middle Name"
+    name="middleName" id="middleName" value="{{ old('middleName') }}" placeholder="Middle Name" 
    >
    <div class="invalid-feedback"><?= $errors->first('middleName') ?></div>
   </div>
   <div class="form-group">
     <label for="lastName">Last Name</label>
     <input type="text" class="form-control <?= $errors->has('lastName')? 'is-invalid' : '' ?>" 
-    name="lastName" id="lastName" placeholder="Last Name"
+    name="lastName" id="lastName" value="{{ old('lastName') }}" placeholder="Last Name"
     >
     <div class="invalid-feedback"><?= $errors->first('lastName') ?></div>
   </div>
@@ -51,14 +51,14 @@
     <smal>Put phone only in following formats: +38(066)1234567 +38(0661)123456 +38(06612)12345 1234567</smal>
     </div>
     <input type="tel" class="form-control <?= $errors->has('phone')? 'is-invalid' : '' ?>" 
-    name="phone" id="phone" placeholder="Phone"
+    name="phone" id="phone" value="{{ old('phone') }}" placeholder="Phone"
      >
      <div class="invalid-feedback"><?= $errors->first('phone') ?></div>
   </div>
   <div class="form-group">
     <label for="email">Email</label>
     <input type="text" class="form-control <?= $errors->has('email')? 'is-invalid' : '' ?>"
-     name="email" id="email" placeholder="email"
+     name="email" id="email" value="{{ old('email') }}" placeholder="email"
        >
        <div class="invalid-feedback"><?= $errors->first('email') ?></div>
   </div>
@@ -68,7 +68,7 @@
     <smal>if sum is decimal, use  delimeter -comma, after comma 3 numbers are allowed. the max sum is 500,000 </smal>
     </div>
     <input type="number" class="form-control <?= $errors->has('salary')? 'is-invalid' : '' ?>"
-     name="salary" id="salary" placeholder="Salary" 
+     name="salary" id="salary" value="{{ old('salary') }}" placeholder="Salary" 
      >
      <div class="invalid-feedback"><?= $errors->first('salary') ?></div>
   </div>

@@ -30,7 +30,7 @@ class StoreEmployeeRequest extends FormRequest
             'positionId'=> 'required',
             'leaderId'  => 'required',
             'phone'     => 'required',
-            'email'     => 'required',
+            'email'     => 'required|email',
             'salary'    => 'required',
         ];
     }
