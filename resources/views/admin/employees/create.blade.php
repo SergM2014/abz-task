@@ -34,9 +34,10 @@
     <select class="form-control <?= $errors->has('positionId')? 'is-invalid' : '' ?>"
      id="positionId"  name="positionId">
       @foreach  ($positions as $position)
-      <option value= "{{ $position->id }}" >{{ $position->title }}</option>
+      <option value= "{{ $position->id }}" 
+      @if(old('positionId') == $position->id ) selected @endif
+      >{{ $position->title }}</option>
       @endforeach
-  
     </select>
     <div class="invalid-feedback"><?= $errors->first('positionId') ?></div>
   </div>
