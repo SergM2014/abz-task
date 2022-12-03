@@ -31,14 +31,16 @@
     </select>
   </div>
   <div class="form-group">
-    <label for="leaderId">Leader select</label>
+    <!-- 
     <select class="form-control" id="leaderId">
       <option>1</option>
       <option>2</option>
       <option>3</option>
       <option>4</option>
       <option>5</option>
-    </select>
+    </select> -->
+    <label for="leaderId">Leader select</label>
+    <select name="leaderId" id="leaderIdSelect" class="form-control select2"></select>
   </div>
   <div class="form-group">
     <label for="phone">Phone</label>

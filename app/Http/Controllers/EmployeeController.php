@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Employee;
 use App\Models\Position;
+use Illuminate\Support\Facades\DB;
 
 class EmployeeController extends Controller
 {
@@ -85,5 +86,14 @@ class EmployeeController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function search(Request $request)
+    {
+        $employees = Employee::where('last_name', 'LIKE', '%'.$request->input('term', '').'%')
+                    ->get(['id', DB::raw("CONCAT(first_name, ' ', middle_name ,' ', last_name) as text")]);
+                    
+        return ['results' => $employees];
+      
     }
 }

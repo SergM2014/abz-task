@@ -15,6 +15,8 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="/admin/dist/css/adminlte.min.css">
 
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
   @livewireStyles
 
 </head>
@@ -175,6 +177,9 @@
 <!-- <script src="dist/js/demo.js"></script> -->
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="/admin/dist/js/pages/dashboard2.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="/select2.js?ver={{ time() }}"></script>
 
 @livewireScripts
 </body>
