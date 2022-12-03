@@ -20,14 +20,14 @@
     <input type="text" class="form-control" name="lastName" id="lastName" placeholder="Last Name"
     minlength="2" maxlength="256" required  >
   </div>
+  
   <div class="form-group">
     <label for="positionId">Position select</label>
     <select class="form-control" id="positionId">
-      <option>1</option>
-      <option>2</option>
-      <option>3</option>
-      <option>4</option>
-      <option>5</option>
+      @foreach  ($positions as $position)
+      <option value= "{{ $position->id }}" >{{ $position->title }}</option>
+      @endforeach
+  
     </select>
   </div>
   <div class="form-group">
