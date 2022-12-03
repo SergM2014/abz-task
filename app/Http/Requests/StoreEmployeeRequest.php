@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\ValidatePhone;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreEmployeeRequest extends FormRequest
@@ -29,7 +30,7 @@ class StoreEmployeeRequest extends FormRequest
             'lastName'  => 'required|min:2|max:256',
             'positionId'=> 'required',
             'leaderId'  => 'required',
-            'phone'     => 'required',
+            'phone'     =>  new ValidatePhone,
             'email'     => 'required|email',
             'salary'    => 'required',
         ];
