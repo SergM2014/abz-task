@@ -4,57 +4,73 @@
 
 <h2> Create new Employee </h2>
 
-<form class="m-3">
-  <div class="form-group" method="post" action=" {{ route('employees.store') }}>
+<form class="m-3" method="post" action="{{ route('employees.store') }}">
+  
+<input type="hidden" name="_token" value="{{ csrf_token() }}" />
+  <div class="form-group">
     <label for="firstName">First Name</label>
-    <input type="text" class="form-control" name="firstName" id="firstName" placeholder="First Name"
-    minlength="2" maxlength="256" required >
+    <input type="text" class="form-control <?= $errors->has('firstName')? 'is-invalid' : '' ?>" 
+    name="firstName" id="firstName" value="{{ old('firstName') }}" placeholder="First Name"
+   >
+   <div class="invalid-feedback"><?= $errors->first('firstName') ?></div>
   </div>
   <div class="form-group">
     <label for="middleName">Middle Name</label>
-    <input type="text" class="form-control" name="middleName" id="middleName" placeholder="Middle Name"
-    minlength="2" maxlength="256" >
+    <input type="text" class="form-control <?= $errors->has('middleName')? 'is-invalid' : '' ?>" 
+    name="middleName" id="middleName" placeholder="Middle Name"
+   >
+   <div class="invalid-feedback"><?= $errors->first('middleName') ?></div>
   </div>
   <div class="form-group">
     <label for="lastName">Last Name</label>
-    <input type="text" class="form-control" name="lastName" id="lastName" placeholder="Last Name"
-    minlength="2" maxlength="256" required  >
+    <input type="text" class="form-control <?= $errors->has('lastName')? 'is-invalid' : '' ?>" 
+    name="lastName" id="lastName" placeholder="Last Name"
+    >
+    <div class="invalid-feedback"><?= $errors->first('lastName') ?></div>
   </div>
   
   <div class="form-group">
     <label for="positionId">Position select</label>
-    <select class="form-control" id="positionId" reqired>
+    <select class="form-control <?= $errors->has('positionId')? 'is-invalid' : '' ?>"
+     id="positionId"  name="positionId">
       @foreach  ($positions as $position)
       <option value= "{{ $position->id }}" >{{ $position->title }}</option>
       @endforeach
   
     </select>
+    <div class="invalid-feedback"><?= $errors->first('positionId') ?></div>
   </div>
   <div class="form-group">
     <label for="leaderId">Leader select</label>
-    <select name="leaderId" id="leaderIdSelect" class="form-control select2" required></select>
+    <select name="leaderId" id="leaderIdSelect" class="form-control <?= $errors->has('leaderId')? 'is-invalid' : '' ?> select2" ></select>
+    <div class="invalid-feedback"><?= $errors->first('leaderId') ?></div>
   </div>
   <div class="form-group">
     <label for="phone">Phone</label>
     <div class="text-red">
     <smal>Put phone only in following formats: +38(066)1234567 +38(0661)123456 +38(06612)12345 1234567</smal>
     </div>
-    <input type="tel" class="form-control" name="phone" id="phone" placeholder="Phone"
-     pattern="([\+]\d{2}[\(]\d{3}[\)]\d{7})|([\+]\d{2}[\(]\d{4}[\)]\d{6})|([\+]\d{2}[\(]\d{5}[\)]\d{5})|\d{10}"
-     required >
+    <input type="tel" class="form-control <?= $errors->has('phone')? 'is-invalid' : '' ?>" 
+    name="phone" id="phone" placeholder="Phone"
+     >
+     <div class="invalid-feedback"><?= $errors->first('phone') ?></div>
   </div>
   <div class="form-group">
     <label for="email">Email</label>
-    <input type="email" class="form-control" name="email" id="email" placeholder="email"
-     required  >
+    <input type="text" class="form-control <?= $errors->has('email')? 'is-invalid' : '' ?>"
+     name="email" id="email" placeholder="email"
+       >
+       <div class="invalid-feedback"><?= $errors->first('email') ?></div>
   </div>
   <div class="form-group">
     <label for="salary">Salary</label>
     <div class="text-red">
     <smal>if sum is decimal, use  delimeter -comma, after comma 3 numbers are allowed. the max sum is 500,000 </smal>
     </div>
-    <input type="number" class="form-control" name="salary" id="salary" placeholder="Salary" 
-    step="0.001" min="0" max="500" >
+    <input type="number" class="form-control <?= $errors->has('salary')? 'is-invalid' : '' ?>"
+     name="salary" id="salary" placeholder="Salary" 
+     >
+     <div class="invalid-feedback"><?= $errors->first('salary') ?></div>
   </div>
   <div class="form-group">
     <label for="photo">Photo</label>

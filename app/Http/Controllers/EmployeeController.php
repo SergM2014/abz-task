@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreEmployeeRequest;
 use Illuminate\Http\Request;
 use App\Models\Employee;
 use App\Models\Position;
@@ -37,9 +38,11 @@ class EmployeeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreEmployeeRequest $request)
     {
-        //
+dd(12121);
+        $validated = $request->validated();
+        dd($validated);
     }
 
     /**
@@ -92,7 +95,7 @@ class EmployeeController extends Controller
     {
         $employees = Employee::where('last_name', 'LIKE', '%'.$request->input('term', '').'%')
                     ->get(['id', DB::raw("CONCAT(first_name, ' ', middle_name ,' ', last_name) as text")]);
-                    
+
         return ['results' => $employees];
       
     }
