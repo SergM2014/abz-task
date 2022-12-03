@@ -70,7 +70,7 @@
     </div>
     <input type="number" class="form-control <?= $errors->has('salary')? 'is-invalid' : '' ?>"
      name="salary" id="salary" value="{{ old('salary') }}" placeholder="Salary" 
-     >
+     step="0.001">
      <div class="invalid-feedback"><?= $errors->first('salary') ?></div>
   </div>
   <div class="form-group">

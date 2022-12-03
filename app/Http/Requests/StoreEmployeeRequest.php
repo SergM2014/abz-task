@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Rules\ValidatePhone;
+use App\Rules\ValidateSalary;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreEmployeeRequest extends FormRequest
@@ -32,7 +33,7 @@ class StoreEmployeeRequest extends FormRequest
             'leaderId'  => 'required',
             'phone'     =>  new ValidatePhone,
             'email'     => 'required|email',
-            'salary'    => 'required',
+            'salary'    => new ValidateSalary,
         ];
     }
 }
