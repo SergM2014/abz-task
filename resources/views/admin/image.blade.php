@@ -3,14 +3,11 @@
 @section('content')
 
 
-      <div class="col-md-12 col-sm-12 col-xs-12">
-
-        <!-- Response message -->
-        <div class="alert displaynone" id="responseMsg"></div>
+      <div class="col-md-12 col-sm-12 col-xs-12" id="imgBlock">
 
         <!-- File preview --> 
         <div id="filepreview" class="displaynone" > 
-          <img src="{{ asset('storage/no-avatar.png')}}" class="displaynone rounded border border-primary" with="300px" height="300px">
+          <img src="{{ asset('storage/no-avatar.png')}}" class="displaynone rounded border border-primary" with="150px" height="150px">
         </div>
 
         <!-- Form -->

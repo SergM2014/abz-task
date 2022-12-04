@@ -31,12 +31,8 @@ let CSRF_TOKEN = document.querySelector('meta[name="csrf-token"]').getAttribute(
              $('#err_file').addClass('d-none');
 
              if(response.success == 1){ // Uploaded successfully
-
-               // Response message
-               $('#responseMsg').removeClass("alert-danger");
-               $('#responseMsg').addClass("alert-success");
-               $('#responseMsg').html(response.message);
-               $('#responseMsg').show();
+              createAlert(response.message, 'alert-success')
+              
 
                // File preview
                $('#filepreview').show();
@@ -52,10 +48,8 @@ let CSRF_TOKEN = document.querySelector('meta[name="csrf-token"]').getAttribute(
              }else if(response.success == 2){ // File not uploaded
 
                // Response message
-               $('#responseMsg').removeClass("alert-success");
-               $('#responseMsg').addClass("alert-danger");
-               $('#responseMsg').html(response.message);
-               $('#responseMsg').show();
+               createAlert(response.message, 'alert-danger')
+               
              }else{
                // Display Error
                $('#err_file').text(response.error);
@@ -76,5 +70,19 @@ let CSRF_TOKEN = document.querySelector('meta[name="csrf-token"]').getAttribute(
     $('#deleteImage').click(function(){
         $('#filepreview img').attr('src', window.location.origin+'/storage/no-avatar.png');
         document.getElementById('image').value = '';
-    });
-  });
+       
+        createAlert('image Is Deleted', 'alert-danger')
+  })
+
+  function createAlert(msg, level)
+  {
+    let alert = document.createElement('div');
+    alert.classList.add('alert', level,'alert-dismissible', 'fade', 'show');
+    alert.innerHTML= `<strong>${msg}</strong>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+         <span aria-hidden="true">&times;</span>
+      </button>`;
+    document.getElementById('imgBlock').prepend(alert);
+  }
+
+})
