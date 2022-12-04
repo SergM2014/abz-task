@@ -40,9 +40,8 @@ class EmployeeController extends Controller
      */
     public function store(StoreEmployeeRequest $request)
     {
-dd(12121);
         $validated = $request->validated();
-        dd($validated);
+      
     }
 
     /**

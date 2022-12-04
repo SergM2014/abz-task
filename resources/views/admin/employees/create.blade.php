@@ -73,12 +73,32 @@
      step="0.001">
      <div class="invalid-feedback"><?= $errors->first('salary') ?></div>
   </div>
-  <div class="form-group">
+  <!-- <div class="form-group">
     <label for="photo">Photo</label>
     <input type="file" class="form-control-file" id="photo">
-  </div>
+  </div> -->
 
   <button type="submit" class="btn btn-primary mb-2">Update User</button>
 </form>
+                 
+@if(count($errors) > 0)
+    @foreach($errors->all() as $error)
+        <div class="alert alert-danger">{{ $error }}</div>
+    @endforeach
+@endif
+<form class="m-3" action="{{ route('image.store') }}" method="post" enctype="multipart/form-data">
+    @csrf
+    <div class="form-group">
+        <label><b>Image :-</b></label>
+        <input type="file" name="image" class="form-control" value="{{ old('image') }}">
+    </div>
+    <div class="form-group ">
+        <button class="btn btn-success" type="submit">Save Photo</button>
+    </div>
+</form>		
+                    
+                
+            
+      
 
   @endsection
