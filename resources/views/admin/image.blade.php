@@ -6,7 +6,7 @@
          <input type="hidden" name="photo" id="employeePhoto">
         <!-- File preview --> 
         <div id="filepreview" class="displaynone" > 
-          <img src="{{ asset('storage/no-avatar.png')}}" class="displaynone rounded border border-primary" with="150px" height="150px">
+          <img src="{{ asset('storage/no-avatar.png') }}" class="rounded border border-primary" with="150px" height="150px">
         </div>
 
         <!-- Form -->
@@ -15,9 +15,6 @@
            <div class="col-md-6 col-sm-6 col-xs-12">
 
               <input type='file' id="image" name='image' class="form-control">
-
-              <!-- Error -->
-              <div class='alert alert-danger mt-2 d-none text-danger' id="err_file"></div>
 
            </div>
         </div>

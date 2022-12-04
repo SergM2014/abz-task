@@ -14,7 +14,7 @@ class ImageController extends Controller
         $data = array();
 
       $validator = Validator::make($request->all(), [
-         'image' => 'required|mimes:png,jpg,jpeg|max:2048'
+         'image' => 'required|image|mimes:png,jpg,jpeg|max:5124|dimensions:min_width=300,min_height=300'
       ]);
 
       if ($validator->fails()) {
@@ -27,18 +27,20 @@ class ImageController extends Controller
 
              $image = $request->file('image');
              $extension = $image->getClientOriginalExtension();
-             $fileName = time().'.'.$extension;
+           //   $fileName = time().'.'.$extension;
+             $fileName = 'photo_'.time().'.jpg';
              $destinationPath = storage_path('app/public/uploads/thumbs');
              $savedFile = $destinationPath.'/'.$fileName;
              $img = Image::make($image->getRealPath());
-             $img->resize(150,150)->save($savedFile);
-
+             $img->resize(300,300);
+             $img->save($savedFile, 80);
+    
              chmod($savedFile, 0775);
 
              // Response
              $data['success'] = 1;
              $data['message'] = 'Uploaded Successfully!';
-            //  $data['savedFile'] = $savedFile;
+            
             $data['savedFile'] = $fileName;
              $data['extension'] = $extension;
          }else{
@@ -49,6 +51,5 @@ class ImageController extends Controller
       }
 
       return response()->json($data);
-
     }
 }

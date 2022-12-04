@@ -33,8 +33,8 @@ $(document).ready(function(){
              // File preview
             $('#filepreview').show();
             $('#filepreview img').attr('src', window.location.origin+'/storage/uploads/thumbs/'+response.savedFile);
-            $('#filepreview img').show();
-            let hid = $('#employeePhoto');
+            // $('#filepreview img').show();
+            
           
             $('#employeePhoto').val(response.savedFile);
                
@@ -46,9 +46,10 @@ $(document).ready(function(){
                
              }else{
                // Display Error
-               $('#err_file').text(response.error);
-               $('#err_file').removeClass('d-none');
-               $('#err_file').addClass('d-block');
+               createAlert(response.error, 'alert-danger')
+              //  $('#err_file').text(response.error);
+              //  $('#err_file').removeClass('d-none');
+              //  $('#err_file').addClass('d-block');
              } 
            },
            error: function(response){
@@ -63,7 +64,7 @@ $(document).ready(function(){
 
     $('#deleteImage').click(function(){
       if (!$('#employeePhoto').val()) return;
-      
+
         $('#filepreview img').attr('src', window.location.origin+'/storage/no-avatar.png');
         document.getElementById('image').value = '';
        
