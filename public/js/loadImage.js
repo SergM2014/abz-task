@@ -3,7 +3,6 @@ let CSRF_TOKEN = document.querySelector('meta[name="csrf-token"]').getAttribute(
   $(document).ready(function(){
 
     $('#uploadImage').click(function(){
-   
       // Get the selected file
       let images = $('#image')[0].files;
 
@@ -72,5 +71,10 @@ let CSRF_TOKEN = document.querySelector('meta[name="csrf-token"]').getAttribute(
          alert("Please select a file.");
       }
 
+    });
+
+    $('#deleteImage').click(function(){
+        $('#filepreview img').attr('src', window.location.origin+'/storage/no-avatar.png');
+        document.getElementById('image').value = '';
     });
   });

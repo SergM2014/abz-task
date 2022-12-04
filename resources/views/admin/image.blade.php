@@ -10,9 +10,7 @@
 
         <!-- File preview --> 
         <div id="filepreview" class="displaynone" > 
-          <img src="{{ asset('storage/777.png') }}" class="displaynone" with="200px" height="200px"><br>
-
-          <a href="#" class="displaynone" >Click Here..</a>
+          <img src="{{ asset('storage/no-avatar.png')}}" class="displaynone rounded border border-primary" with="300px" height="300px">
         </div>
 
         <!-- Form -->
@@ -30,7 +28,8 @@
 
         <div class="form-group">
            <div class="col-md-6">
-              <input type="button" id="uploadImage" value='UploadImage' class='btn btn-success'>
+              <input type="button" id="uploadImage" value='Upload Image' class='btn btn-success'>
+              <button type="button" class="btn btn-danger" id="deleteImage" >Delete Image</button>
            </div>
         </div>
       </div>
