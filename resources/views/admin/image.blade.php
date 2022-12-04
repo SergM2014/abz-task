@@ -2,9 +2,8 @@
 
 @section('content')
 
-
       <div class="col-md-12 col-sm-12 col-xs-12" id="imgBlock">
-
+         <input type="hidden" name="photo" id="employeePhoto">
         <!-- File preview --> 
         <div id="filepreview" class="displaynone" > 
           <img src="{{ asset('storage/no-avatar.png')}}" class="displaynone rounded border border-primary" with="150px" height="150px">
@@ -29,11 +28,6 @@
               <button type="button" class="btn btn-danger" id="deleteImage" >Delete Image</button>
            </div>
         </div>
-      </div>
-  
-                    
-                
-            
-      
+      </div>              
 
   @endsection
