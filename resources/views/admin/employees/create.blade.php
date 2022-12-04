@@ -81,12 +81,14 @@
   <button type="submit" class="btn btn-primary mb-2">Update User</button>
 </form>
                  
-@if(count($errors) > 0)
-    @foreach($errors->all() as $error)
-        <div class="alert alert-danger">{{ $error }}</div>
-    @endforeach
-@endif
+
 <form class="m-3" action="{{ route('image.store') }}" method="post" enctype="multipart/form-data">
+  {{ $errors }}
+  @if ($errors->has('image'))
+
+  <span class="text-danger">{{ $errors->first('image') }}</span>
+
+  @endif
     @csrf
     <div class="form-group">
         <label><b>Image :-</b></label>
@@ -95,7 +97,9 @@
     <div class="form-group ">
         <button class="btn btn-success" type="submit">Save Photo</button>
     </div>
-</form>		
+</form>	
+
+
                     
                 
             
