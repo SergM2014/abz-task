@@ -11,7 +11,7 @@ class ImageController extends Controller
 {
     public function store(Request $request)
     {
-        $data = array();
+      $data = array();
 
       $validator = Validator::make($request->all(), [
          'image' => 'required|image|mimes:png,jpg,jpeg|max:5124|dimensions:min_width=300,min_height=300'
@@ -49,6 +49,23 @@ class ImageController extends Controller
              $data['message'] = 'File not uploaded.'; 
          }
       }
+
+      return response()->json($data);
+    }
+
+    public function rotate()
+    {
+      $photo = request('photo');
+      $degree = request('degree');
+      $rotatedPhoto = 'rotated_'.$photo;
+
+      $source = imagecreatefromjpeg(storage_path('app/public/uploads/thumbs/'.$photo));
+      $rotate = imagerotate($source, $degree, 0);
+      imagejpeg($rotate, storage_path('app/public/uploads/thumbs/'.$rotatedPhoto));
+
+      $data['success'] = 1;
+      $data['message'] = 'Rotated Successfully!';
+      $data['photo'] = $rotatedPhoto;
 
       return response()->json($data);
     }

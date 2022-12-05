@@ -23,3 +23,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('employee/search', [EmployeeController::class, 'search'])
     ->name('api.employees.search');
 Route::post('image/store', [ImageController::class, 'store'])->name('image.store');
+Route::post('image/rotate', [ImageController::class, 'rotate'])->name('image.rotate');

@@ -56,7 +56,7 @@ $(document).ready(function(){
            }
          });
       }else{
-         alert("Please select a file.");
+        createAlert('Select a file!', 'alert-danger');
       }
 
     });
@@ -81,6 +81,41 @@ $(document).ready(function(){
          <span aria-hidden="true">&times;</span>
       </button>`;
     document.getElementById('imgBlock').prepend(alert);
+  }
+
+  $('#rotateLeft').click(function(){
+    rotatePhoto(90);
+  });
+
+  $('#rotateRight').click(function(){
+    rotatePhoto(270);
+  });
+
+  function rotatePhoto(degree)
+  {
+    let photo = $('#employeePhoto').val();
+    let fd = new FormData();
+
+    fd.append('degree', degree);
+    fd.append('photo', photo);
+    fd.append('_token', CSRF_TOKEN);
+
+    $.ajax({
+      url: "/api/image/rotate",
+      method: 'post',
+      data: fd,
+      contentType: false,
+      processData: false,
+      dataType: 'json',
+      success: function(response){
+        $('#filepreview img').attr('src', window.location.origin+'/storage/uploads/thumbs/'+response.photo);
+        $('#employeePhoto').val(response.photo);
+        createAlert(response.message, 'alert-success');
+      },
+      error: function(response){
+        createAlert('smthing went wrong!', 'alert-danger')
+     }
+    })
   }
 
 })
