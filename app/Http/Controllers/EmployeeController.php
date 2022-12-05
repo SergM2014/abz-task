@@ -41,7 +41,23 @@ class EmployeeController extends Controller
     public function store(StoreEmployeeRequest $request)
     {
         $validated = $request->validated();
-      
+
+        $employee = new Employee();
+        $employee-> first_name = $validated['firstName'];
+        $employee-> middle_name = $validated['middleName']? : null;
+        $employee-> last_name = $validated['lastName'];
+        $employee->position_id = $validated['positionId'];
+        $employee->leader_id = $validated['leaderId'];
+        $employee->employment_date = $validated['employment_date'];
+        $employee->phone = $validated['phone'];
+        $employee->email = $validated['email'];
+        $employee->salary = $validated['salary'];
+        $employee->photo = request('photo')? : null;
+        $employee->admin_created_id = 1;
+
+        $employee->save();
+
+        dd('saved! Hurra!');
     }
 
     /**
