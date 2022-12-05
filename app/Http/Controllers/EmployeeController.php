@@ -28,8 +28,10 @@ class EmployeeController extends Controller
     public function create()
     {
         $positions = Position::all('id', 'title');
+        //the under line must be corrected later
+        $photo = \old('photo')?? 'no-avatar.png';
        
-        return view('admin.employees.create', ['positions' => $positions]);
+        return view('admin.employees.create', ['positions' => $positions, 'photo' => $photo]);
     }
 
     /**
@@ -49,7 +51,7 @@ class EmployeeController extends Controller
         $employee-> last_name = $validated['lastName'];
         $employee->position_id = $validated['positionId'];
         $employee->leader_id = $validated['leaderId'];
-        $employee->employment_date = $validated['employment_date'];
+        $employee->employment_date = $validated['employmentDate'];
         $employee->phone = $validated['phone'];
         $employee->email = $validated['email'];
         $employee->salary = $validated['salary'];

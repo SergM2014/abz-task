@@ -87,7 +87,7 @@
          <input type="hidden" name="photo" id="employeePhoto">
         <!-- File preview --> 
         <div id="filepreview" class="mb-3" > 
-          <img src="{{ asset('storage/no-avatar.png') }}" class="rounded border border-primary" with="150px" height="150px">
+          <img src="{{ asset('storage/uploads/thumbs/'.$photo) }}" class="rounded border border-primary" with="150px" height="150px">
           
          </div>
 
