@@ -6,7 +6,7 @@ use App\Rules\ValidatePhone;
 use App\Rules\ValidateSalary;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreEmployeeRequest extends FormRequest
+class UpdateEmployeeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -32,7 +32,7 @@ class StoreEmployeeRequest extends FormRequest
             'positionId'=> 'required',
             'leaderId'  => 'required',
             'employmentDate' => 'date',
-            'phone'     =>  ['unique:employees',new ValidatePhone],
+            'phone'     =>  new ValidatePhone,
             'email'     => 'required|email',
             'salary'    => new ValidateSalary,
         ];

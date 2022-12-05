@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreEmployeeRequest;
+use App\Http\Requests\UpdateEmployeeRequest;
 use Illuminate\Http\Request;
 use App\Models\Employee;
 use App\Models\Position;
@@ -92,16 +93,27 @@ class EmployeeController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    
+    public function update(UpdateEmployeeRequest $request, $id)
+  
     {
-        //
+        $validated = $request->validated();
+
+        $employee = Employee::find($id);
+        $employee-> first_name = $validated['firstName'];
+        $employee-> middle_name = $validated['middleName']?? null;
+        $employee-> last_name = $validated['lastName'];
+        $employee->position_id = $validated['positionId'];
+        $employee->leader_id = $validated['leaderId'];
+        $employee->employment_date = $validated['employmentDate'];
+        $employee->phone = $validated['phone'];
+        $employee->email = $validated['email'];
+        $employee->salary = $validated['salary'];
+        $employee->photo = request('photo')? : null;
+        $employee->admin_updated_id = $request->user()->id;
+        $employee->save();
+
+        return redirect()->route('employees.index')->with('success','the employee#'.$id.' is updated!');
     }
 
     /**

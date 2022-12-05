@@ -2,11 +2,11 @@
 
 @section('content')
 
-<h2> Edit new Employee # {{ $employee->id }}</h2>
+<h2> Edit Employee # {{ $employee->id }}</h2>
 
-<form class="m-3" method="post" action="{{ route('employees.update', $employee) }}">
-  
-<input type="hidden" name="_token" value="{{ csrf_token() }}" />
+<form class="m-3"  action="{{ route('employees.update', $employee) }}" method="post">
+@method('PUT')
+    @csrf
   <div class="form-group">
     <label for="firstName">First Name</label>
     <input type="text" class="form-control <?= $errors->has('firstName')? 'is-invalid' : '' ?>" 
@@ -81,10 +81,10 @@
      <div class="invalid-feedback"><?= $errors->first('salary') ?></div>
   </div>
   
-  @include('admin.employees.partials.uploadPhoto')
+     @include('admin.employees.partials.uploadPhoto')
      
     <div class="text-center">
-      <button type="submit" class="btn btn-primary mb-2 btn-lg">Update User</button>
+        <button type="submit" class="btn btn-primary mb-2 btn-lg">Update User</button>
     </div>
 </form>                   
                 
