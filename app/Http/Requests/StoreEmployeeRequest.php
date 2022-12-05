@@ -31,6 +31,7 @@ class StoreEmployeeRequest extends FormRequest
             'lastName'  => 'required|min:2|max:256',
             'positionId'=> 'required',
             'leaderId'  => 'required',
+            'employmentDate' => 'date',
             'phone'     =>  new ValidatePhone,
             'email'     => 'required|email',
             'salary'    => new ValidateSalary,

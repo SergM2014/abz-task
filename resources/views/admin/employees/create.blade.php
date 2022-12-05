@@ -3,7 +3,7 @@
 @section('content')
 
 <h2> Create new Employee </h2>
-
+{{ $errors }}
 <form class="m-3" method="post" action="{{ route('employees.store') }}">
   
 <input type="hidden" name="_token" value="{{ csrf_token() }}" />
@@ -45,6 +45,13 @@
     <label for="leaderId">Leader select</label>
     <select name="leaderId" id="leaderIdSelect" class="form-control <?= $errors->has('leaderId')? 'is-invalid' : '' ?> select2" ></select>
     <div class="invalid-feedback"><?= $errors->first('leaderId') ?></div>
+  </div>
+  <div class="form-group">
+    <label for="employmentDate">Employment Date</label>
+        <input type="date" class="form-control <?= $errors->has('employmentDate')? 'is-invalid' : '' ?>" 
+    name="employmentDate" id="employmentDate" value="{{ old('employmentDate') }}" placeholder="employmentDate"
+     >
+     <div class="invalid-feedback"><?= $errors->first('employmentDate') ?></div>
   </div>
   <div class="form-group">
     <label for="phone">Phone</label>
