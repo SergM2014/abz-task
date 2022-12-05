@@ -33,7 +33,7 @@ $(document).ready(function(){
              // File preview
             $('#filepreview').show();
             $('#filepreview img').attr('src', window.location.origin+'/storage/uploads/thumbs/'+response.savedFile);
-            // $('#filepreview img').show();
+            $('#rotateControlBlock').removeClass('d-none');
             
           
             $('#employeePhoto').val(response.savedFile);
@@ -42,14 +42,13 @@ $(document).ready(function(){
 
               $('#employeePhoto').val('');
                // Response message
-               createAlert(response.message, 'alert-danger')
+               createAlert(response.message, 'alert-danger');
+               $('#rotateControlBlock').addClass('d-none');
                
              }else{
                // Display Error
-               createAlert(response.error, 'alert-danger')
-              //  $('#err_file').text(response.error);
-              //  $('#err_file').removeClass('d-none');
-              //  $('#err_file').addClass('d-block');
+               createAlert(response.error, 'alert-danger');
+               $('#rotateControlBlock').addClass('d-none');
              } 
            },
            error: function(response){
@@ -69,7 +68,8 @@ $(document).ready(function(){
         document.getElementById('image').value = '';
        
         $('#employeePhoto').val('');
-        createAlert('image Is Deleted!', 'alert-danger')
+        createAlert('image Is Deleted!', 'alert-danger');
+        $('#rotateControlBlock').addClass('d-none');
   })
 
   function createAlert(msg, level)
