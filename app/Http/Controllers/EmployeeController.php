@@ -81,7 +81,15 @@ class EmployeeController extends Controller
     public function edit($id)
     {
         $employee = Employee::findOrFail($id);
-        return view('admin.employees.edit', ['employee' => $employee]);
+        $positions = Position::all('id', 'title');
+        $photo =  \old('photo')?? $employee->photo ?? 'no-avatar.png';
+        $positionId = old('positionId')?? $employee->position_id;
+        return view('admin.employees.edit', [
+            'employee' => $employee, 
+            'positions' => $positions, 
+            'photo' => $photo,
+            'positionId' => $positionId
+        ]);
     }
 
     /**

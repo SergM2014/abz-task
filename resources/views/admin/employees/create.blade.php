@@ -97,13 +97,9 @@
             </div>
 
         <div class="form-group">
-          
-           <!-- <div class="col-md-6 col-sm-6 col-xs-12"> -->
 
-              <input type='file' id="image" name='image' class="form-control">
+            <input type='file' id="image" name='image' class="form-control" >
               
-           <!-- </div> -->
-           
         </div>
 
         <div class="form-group">
