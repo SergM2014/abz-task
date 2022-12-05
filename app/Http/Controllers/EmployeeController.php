@@ -58,8 +58,7 @@ class EmployeeController extends Controller
         $employee->admin_created_id = $request->user()->id;
         $employee->save();
        
-        return redirect()->route('employees.index')
-        ->with('success','A new employee is created!');
+        return redirect()->route('employees.index')->with('success','A new employee is created!');
     }
 
     /**

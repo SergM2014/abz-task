@@ -3,7 +3,7 @@
 @section('content')
 
 <h2> Create new Employee </h2>
-{{ $errors }}
+
 <form class="m-3" method="post" action="{{ route('employees.store') }}">
   
 <input type="hidden" name="_token" value="{{ csrf_token() }}" />
