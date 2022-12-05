@@ -24,7 +24,3 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::prefix('admin')->group(function () {
     Route::resource('employees', EmployeeController::class);
 });
-
-Route::get('/image', function(){
-    return view('admin.image');
-});

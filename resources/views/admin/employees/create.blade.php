@@ -73,36 +73,43 @@
      step="0.001">
      <div class="invalid-feedback"><?= $errors->first('salary') ?></div>
   </div>
-  <!-- <div class="form-group">
-    <label for="photo">Photo</label>
-    <input type="file" class="form-control-file" id="photo">
-  </div> -->
+  
+  <!-- upload file section -->
+  <div class="col-md-12 col-sm-12 col-xs-12" id="imgBlock">
+  <label for="salary">Photo upload</label>
+         <input type="hidden" name="photo" id="employeePhoto">
+        <!-- File preview --> 
+        <div id="filepreview" class="mb-3" > 
+          <img src="{{ asset('storage/no-avatar.png') }}" class="rounded border border-primary" with="150px" height="150px">
+          
+         </div>
 
-  <button type="submit" class="btn btn-primary mb-2">Update User</button>
-</form>
-                 
+         <div class="mt-3 d-none" id="rotateControlBlock">
+               <button type="button" class="btn btn-info btn-sm" id="rotateLeft">Rotate Left</button>
+               <button type="button" class="btn btn-info btn-sm" id="rotateRight">Rotate Right</button>
+            </div>
 
-<form class="m-3" action="{{ route('image.store') }}" method="post" enctype="multipart/form-data">
-  {{ $errors }}
-  @if ($errors->has('image'))
+        <div class="form-group">
+          
+           <!-- <div class="col-md-6 col-sm-6 col-xs-12"> -->
 
-  <span class="text-danger">{{ $errors->first('image') }}</span>
+              <input type='file' id="image" name='image' class="form-control">
+              
+           <!-- </div> -->
+           
+        </div>
 
-  @endif
-    @csrf
-    <div class="form-group">
-        <label><b>Image :-</b></label>
-        <input type="file" name="image" class="form-control" value="{{ old('image') }}">
-    </div>
-    <div class="form-group ">
-        <button class="btn btn-success" type="submit">Save Photo</button>
-    </div>
-</form>	
+        <div class="form-group">
+           <div class="col-md-6">
+              <input type="button" id="uploadImage" value='Upload Image' class='btn btn-success'>
+              <button type="button" class="btn btn-danger" id="deleteImage" >Delete Image</button>
+           </div>
+        </div>
+      </div>      
 
 
-                    
+  <button type="submit" class="btn btn-primary mb-2 btn-lg">Update User</button>
+</form>                   
                 
-            
-      
 
   @endsection
