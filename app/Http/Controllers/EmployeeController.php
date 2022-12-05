@@ -42,7 +42,6 @@ class EmployeeController extends Controller
      */
     public function store(StoreEmployeeRequest $request)
     {
-
         $validated = $request->validated();
 
         $employee = new Employee();
@@ -57,10 +56,10 @@ class EmployeeController extends Controller
         $employee->salary = $validated['salary'];
         $employee->photo = request('photo')? : null;
         $employee->admin_created_id = $request->user()->id;
-
         $employee->save();
-
-        dd('saved! Hurra!');
+       
+        return redirect()->route('employees.index')
+        ->with('success','A new employee is created!');
     }
 
     /**
