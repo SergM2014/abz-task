@@ -84,7 +84,7 @@ class EmployeeController extends Controller
         $employee = Employee::findOrFail($id);
         $positions = Position::all('id', 'title');
         $photo =  \old('photo')?? $employee->photo ?? 'no-avatar.png';
-        $positionId = old('positionId')?? $employee->position_id;
+        $positionId = \old('positionId')?? $employee->position_id;
         return view('admin.employees.edit', [
             'employee' => $employee, 
             'positions' => $positions, 
@@ -133,6 +133,14 @@ class EmployeeController extends Controller
                     ->get(['id', DB::raw("CONCAT(first_name, ' ', middle_name ,' ', last_name) as text")]);
 
         return ['results' => $employees];
-      
+    }
+
+    public function leader(Request $request)
+    {
+        $leader = Employee::where('id', request('leaderId'))
+                ->first(['id', DB::raw("CONCAT(first_name, ' ', middle_name ,' ', last_name) as text")]);
+
+         return response()->json(['id' => $leader->id, 'text' => $leader->text]);
+       
     }
 }
