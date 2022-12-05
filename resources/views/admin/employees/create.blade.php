@@ -84,7 +84,7 @@
           
          </div>
 
-         <div class="mt-3 d-none" id="rotateControlBlock">
+         <div class="my-3 d-none" id="rotateControlBlock">
                <button type="button" class="btn btn-info btn-sm" id="rotateLeft">Rotate Left</button>
                <button type="button" class="btn btn-info btn-sm" id="rotateRight">Rotate Right</button>
             </div>
@@ -107,8 +107,9 @@
         </div>
       </div>      
 
-
-  <button type="submit" class="btn btn-primary mb-2 btn-lg">Update User</button>
+    <div class="text-center">
+      <button type="submit" class="btn btn-primary mb-2 btn-lg">Update User</button>
+    </div>
 </form>                   
                 
 
