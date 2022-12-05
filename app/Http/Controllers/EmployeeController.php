@@ -56,7 +56,7 @@ class EmployeeController extends Controller
         $employee->email = $validated['email'];
         $employee->salary = $validated['salary'];
         $employee->photo = request('photo')? : null;
-        $employee->admin_created_id = 1;
+        $employee->admin_created_id = $request->user()->id;
 
         $employee->save();
 
