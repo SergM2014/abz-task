@@ -1,26 +1,26 @@
-Livewire.on('laraveltable:action:confirm', (actionType, actionIdentifier, modelPrimary, confirmationQuestion) => {
-    // You can replace this native JS confirm dialog by your favorite modal/alert/toast library implementation. Or keep it this way!
- // to figure out if employee has backenders 
+document.getElementById('employeesCard').addEventListener('click', function(e){
+    
+    let parentEl = e.target.parentElement;
+    if (parentEl.dataset.action == 'row_action_destroy') {
 
- fetch( '/api/employee/subordinates',
-    { 
-        method: 'GET',
-        credentials:'same-origin'
-    })
-        .then((response) => response.json())
-        .then(function (data) {
+     let id = parentEl.dataset.id;
 
-       console.log(data)
+     fetch( '/api/employee/subordinates?id='+id,
+        { 
+            method: 'GET',
+            credentials:'same-origin'
         })
-    
+            .then((response) => response.json())
+            .then(function (data) {
+                if (data.length >0) {
+                    alert('atention!!! Current Employee has suordinates!!!')
+                } else {
+                    alert('You can delete this Employee!!!')
+                }
+            })
+        }
 
-    
-
-
-
-    if (window.confirm(confirmationQuestion)) {
-
-        // As explained above, just send back the 3 first argument from the `table:action:confirm` event when the action is confirmed
-        Livewire.emit('laraveltable:action:confirmed', actionType, actionIdentifier, modelPrimary);
-    }
+        
 })
+
+

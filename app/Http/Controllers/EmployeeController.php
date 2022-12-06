@@ -7,6 +7,8 @@ use App\Http\Requests\UpdateEmployeeRequest;
 use Illuminate\Http\Request;
 use App\Models\Employee;
 use App\Models\Position;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
 
 class EmployeeController extends Controller
@@ -127,7 +129,7 @@ class EmployeeController extends Controller
         //
     }
 
-    public function search(Request $request)
+    public function search(Request $request): array
     {
         $superiorId = $this->getSuperiorsPositionId(request('positionId'));
 
@@ -138,7 +140,7 @@ class EmployeeController extends Controller
         return ['results' => $employees];
     }
 
-    public function getLeader(Request $request)
+    public function getLeader(Request $request): JsonResponse
     {
         if (!request('leaderId')) {
             return response()->json(['id' => 0, 'text' => 'it is the highest hierachical level! No suprem positions at all!']);
@@ -151,7 +153,7 @@ class EmployeeController extends Controller
        
     }
 
-    private function getSuperiorsPositionId(int $id)
+    private function getSuperiorsPositionId(int $id): int
     {
         $position = Position::find($id);
         $parentId = $position->parent_id;
@@ -159,10 +161,11 @@ class EmployeeController extends Controller
        return $parentId; 
     }
 
-    public function getSubordinates(Request $request)
+    public function getSubordinates(Request $request): Collection
     {
         $id = request('id');
         $subOrdinates = Employee::where('leader_id', $id)->get();
-        dd($subOrdinates);
+
+        return $subOrdinates;
     }
 }
