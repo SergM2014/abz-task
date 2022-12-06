@@ -2,8 +2,11 @@ $(document).ready(function () {
     if( $('#leaderIdSelect')){
 
         searchEmployee();
-
-        getLeader();
+//only if edit form
+    if ($('#leaderId').hasClass('update') ){
+      getLeader();
+    }
+        
 
         document.getElementById("positionId").addEventListener('change', function (e) {
             console.log("Changed to: " + e.target.value)

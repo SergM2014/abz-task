@@ -33,19 +33,22 @@
     <label for="positionId">Position select</label>
     <select class="form-control <?= $errors->has('positionId')? 'is-invalid' : '' ?>"
      id="positionId"  name="positionId">
-      @foreach  ($positions as $position)
+     @foreach  ($positions as $position)
       <option value= "{{ $position->id }}" 
-      @if(old('positionId') == $position->id ) selected @endif
+     
       >{{ $position->title }}</option>
       @endforeach
     </select>
     <div class="invalid-feedback"><?= $errors->first('positionId') ?></div>
   </div>
+
   <div class="form-group">
     <label for="leaderId">Leader select</label>
+    <input type="hidden"  id="leaderId" value="{{ old('leaderId') }}" >
     <select name="leaderId" id="leaderIdSelect" class="form-control <?= $errors->has('leaderId')? 'is-invalid' : '' ?> select2" ></select>
     <div class="invalid-feedback"><?= $errors->first('leaderId') ?></div>
   </div>
+
   <div class="form-group">
     <label for="employmentDate">Employment Date</label>
         <input type="date" class="form-control <?= $errors->has('employmentDate')? 'is-invalid' : '' ?>" 
