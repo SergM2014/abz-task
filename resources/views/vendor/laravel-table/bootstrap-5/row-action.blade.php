@@ -7,5 +7,4 @@
    title="{{ $title }}"
    data-bs-toggle="tooltip">
     {!! $icon !!}
-    (+)
 </a>
