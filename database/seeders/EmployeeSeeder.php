@@ -17,8 +17,8 @@ class EmployeeSeeder extends Seeder
     {
         Employee::factory()->create();
         Employee::factory()->count(20) ->viceDirector()->create();
-        Employee::factory()->count(1000)->teamLeader()->create();
-        Employee::factory()->count(5000)->supervisor()->create();
-        Employee::factory()->count(45000)->employee()->create();
+        Employee::factory()->count(100)->teamLeader()->create();
+        Employee::factory()->count(500)->supervisor()->create();
+        Employee::factory()->count(4500)->employee()->create();
     }
 }
