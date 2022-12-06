@@ -27,7 +27,7 @@ class StoreEmployeeRequest extends FormRequest
     {
         return [
             'firstName' => 'required|min:2|max:256',
-            // 'middleName'=> 'min:2|max:256',
+            'middleName'=> 'required|min:2|max:256',
             'lastName'  => 'required|min:2|max:256',
             'positionId'=> 'required',
             'leaderId'  => 'required',

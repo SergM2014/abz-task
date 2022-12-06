@@ -87,7 +87,7 @@
   @include('admin.employees.partials.uploadPhoto')  
 
   <div class="text-center">
-    <button type="submit" class="btn btn-primary mb-2 btn-lg">Update User</button>
+    <button type="submit" class="btn btn-primary mb-2 btn-lg">Create a new User</button>
   </div>
 </form>                   
                 
