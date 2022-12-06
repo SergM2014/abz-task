@@ -7,11 +7,12 @@ $(document).ready(function () {
       getLeader();
     }
         
-
+    if(document.getElementById("positionId")) {
         document.getElementById("positionId").addEventListener('change', function (e) {
             console.log("Changed to: " + e.target.value)
             $('#leaderIdSelect').val(null).trigger('change');
           })
+        }
     }
   });
 
