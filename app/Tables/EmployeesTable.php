@@ -40,11 +40,11 @@ class EmployeesTable extends AbstractTableConfiguration
         ];
     }
 
-    protected function results(): array
-    {
-        return [
-            // The table results configuration.
-            // As results are optional on tables, you may delete this method if you do not use it.
-        ];
-    }
+    // protected function results(): array
+    // {
+    //     return [
+    //         // The table results configuration.
+    //         // As results are optional on tables, you may delete this method if you do not use it.
+    //     ];
+    // }
 }

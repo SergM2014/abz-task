@@ -185,6 +185,9 @@
 <script src="/js/select2.js?ver={{ time() }}"></script>
 <script src="/js/loadImage.js?ver={{ time() }}"></script>
 
+
 @livewireScripts
+<script src="/js/table.js?ver={{ time() }}"></script>
+
 </body>
 </html>
