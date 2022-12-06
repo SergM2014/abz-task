@@ -129,18 +129,33 @@ class EmployeeController extends Controller
 
     public function search(Request $request)
     {
+        $superiorId = $this->getSuperiorsPositionId(request('positionId'));
+
         $employees = Employee::where('last_name', 'LIKE', '%'.$request->input('term', '').'%')
+                    ->where('position_id', $superiorId)
                     ->get(['id', DB::raw("CONCAT(first_name, ' ', middle_name ,' ', last_name) as text")]);
 
         return ['results' => $employees];
     }
 
-    public function leader(Request $request)
+    public function getLeader(Request $request)
     {
+        if (!request('leaderId')) {
+            return response()->json(['id' => 0, 'text' => 'it is the highest hierachical level! No suprem positions at all!']);
+        }
+
         $leader = Employee::where('id', request('leaderId'))
                 ->first(['id', DB::raw("CONCAT(first_name, ' ', middle_name ,' ', last_name) as text")]);
 
          return response()->json(['id' => $leader->id, 'text' => $leader->text]);
        
+    }
+
+    private function getSuperiorsPositionId(int $id)
+    {
+        $position = Position::find($id);
+        $parentId = $position->parent_id;
+        
+       return $parentId; 
     }
 }

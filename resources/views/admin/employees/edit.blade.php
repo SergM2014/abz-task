@@ -41,9 +41,10 @@
     </select>
     <div class="invalid-feedback"><?= $errors->first('positionId') ?></div>
   </div>
-  <input type="hidden"  id="leaderId" value="{{ old('leaderId')?? $employee->leader_id }}" >
+ 
   <div class="form-group">
     <label for="leaderId">Leader select</label>
+    <input type="hidden"  id="leaderId" value="{{ old('leaderId')?? $employee->leader_id }}" >
     <select name="leaderId" id="leaderIdSelect" class="form-control <?= $errors->has('leaderId')? 'is-invalid' : '' ?> select2" ></select>
     <div class="invalid-feedback"><?= $errors->first('leaderId') ?></div>
   </div>
