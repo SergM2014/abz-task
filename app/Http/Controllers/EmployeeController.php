@@ -158,4 +158,11 @@ class EmployeeController extends Controller
         
        return $parentId; 
     }
+
+    public function getSubordinates(Request $request)
+    {
+        $id = request('id');
+        $subOrdinates = Employee::where('leader_id', $id)->get();
+        dd($subOrdinates);
+    }
 }

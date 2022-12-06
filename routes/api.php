@@ -22,7 +22,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('employee/search', [EmployeeController::class, 'search'])
     ->name('api.employees.search');
-    Route::get('employee/getLeader/{leaderId}', [EmployeeController::class, 'getLeader'])
+Route::get('employee/leader/{id}', [EmployeeController::class, 'getLeader'])
     ->name('api.employees.search');
+Route::get('employee/subordinates', [EmployeeController::class, 'getSubordinates'])
+    ->name('api.employees.subordinates');
+
 Route::post('image/store', [ImageController::class, 'store'])->name('image.store');
 Route::post('image/rotate', [ImageController::class, 'rotate'])->name('image.rotate');

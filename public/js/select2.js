@@ -41,9 +41,9 @@ $(document).ready(function () {
   {
      let leaderSelect = $('#leaderIdSelect');
      // Fetch the preselected item, and add to the control
-     let leaderId = $('#leaderId').val();
+     let id = $('#leaderId').val();
 
-     fetch( '/api/employee/getLeader/' + leaderId,
+     fetch( '/api/employee/leader/' + id,
              { method: 'GET',
              credentials:'same-origin'
          })
