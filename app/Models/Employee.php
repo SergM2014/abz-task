@@ -4,7 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
 
 class Employee extends Model
 {
@@ -12,8 +13,10 @@ class Employee extends Model
 
     protected $fillables = [];
 
-    public function position(): HasOne
+    
+
+    public function position(): BelongsTo
     {
-        return $this->hasOne(Position::class);
+        return $this->belongsTo(Position::class);
     }
 }
