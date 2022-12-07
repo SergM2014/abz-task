@@ -1,6 +1,6 @@
 <div class="col-md-12 col-sm-12 col-xs-12" id="imgBlock">
     <label for="salary">Photo upload</label>
-        <input type="hidden" name="photo" id="employeePhoto">
+        <input type="hidden" name="photo" id="employeePhoto" value="{{ $photo }}">
     <!-- File preview --> 
     <div id="filepreview" class="mb-3" > 
         <img src="{{ asset('storage/uploads/thumbs/'.$photo) }}" class="rounded border border-primary" with="150px" height="150px">
