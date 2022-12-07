@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreEmployeeRequest;
 use App\Http\Requests\UpdateEmployeeRequest;
+use App\Http\Requests\UpdateLeaderRequest;
 use Illuminate\Http\Request;
 use App\Models\Employee;
 use App\Models\Position;
@@ -15,21 +16,11 @@ use Illuminate\View\View;
 
 class EmployeeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         return view('admin.employees.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $positions = Position::all('id', 'title');
@@ -163,9 +154,9 @@ class EmployeeController extends Controller
        return $parentId; 
     }
 
-    public function getSubordinates(): Collection
+    public function getSubordinates( $id = null): Collection
     {
-        $id = request('id');
+        $id = $id?? request('id');
         $subOrdinates = Employee::where('leader_id', $id)->get();
 
         return $subOrdinates;
@@ -186,14 +177,23 @@ class EmployeeController extends Controller
 
     public function searchLeaders(Request $request)
     {
-        
-
         $employees = Employee::where('last_name', 'LIKE', '%'.$request->input('term', '').'%')
                     ->where('position_id', $request->input('positionId'))
                     ->whereNot('id',  $request->input('id'))
                     ->get(['id', DB::raw("CONCAT(first_name, ' ', middle_name ,' ', last_name) as text")]);
 
         return ['results' => $employees];
+    }
+
+    public function changeLeader(UpdateLeaderRequest $request)
+    {
+        $subOrdinates = $this->getSubordinates(request('oldLeaderId'));
+        
+        foreach($subOrdinates as $subOrdinate) {
+            $subOrdinate->leader_id = request('leaderId');
+            $subOrdinate->update();
+        }
+       
     }
 
     

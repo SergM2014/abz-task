@@ -74,7 +74,7 @@ $(document).ready(function () {
   function searchOtherLeaders()
   {
     let positionId = $('#positionId').val();
-    let employeeId = $('#employeeId').val();
+    let oldLeaderId = $('#oldLeaderId').val();
 
     $('#anotherLeaderIdSelect').select2({
 
@@ -86,7 +86,7 @@ $(document).ready(function () {
                 var query = {
                   term: params.term,
                   positionId: positionId,
-                  id: employeeId,
+                  id: oldLeaderId,
                 }
                 // Query parameters will be ?term=[term]&positionId=[positionId]
                 return query;
