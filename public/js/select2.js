@@ -1,7 +1,8 @@
 $(document).ready(function () {
+  
     if( $('#leaderIdSelect')){
 
-        searchEmployee();
+      searchEmployee();
 //only for edit form
     if ($('#leaderId').hasClass('update') ){
       getLeader();
@@ -9,22 +10,17 @@ $(document).ready(function () {
         
     if(document.getElementById("positionId")) {
         document.getElementById("positionId").addEventListener('change', function (e) {
-            console.log("Changed to: " + e.target.value)
             $('#leaderIdSelect').val(null).trigger('change');
           })
         }
     }
 
-    if ($('#anotherLeaderIdSelect')) {
-      
-      searchOtherLeaders();
-    }
+    if ($('#anotherLeaderIdSelect')) searchOtherLeaders();
+     
   });
 
   function searchEmployee()
   {
-    let positionId = $('#positionId').val();
-
     $('#leaderIdSelect').select2({
 
         minimumInputLength: 3,
@@ -34,7 +30,7 @@ $(document).ready(function () {
             data: function (params) {
                 var query = {
                   term: params.term,
-                  positionId: positionId
+                  positionId: $('#positionId').val()
                 }
                 // Query parameters will be ?term=[term]&positionId=[positionId]
                 return query;

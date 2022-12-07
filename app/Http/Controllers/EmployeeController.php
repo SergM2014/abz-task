@@ -111,7 +111,7 @@ class EmployeeController extends Controller
        
     }
 
-    private function getSuperiorsPositionId(int $id): int
+    private function getSuperiorsPositionId(int $id): ?int
     {
         $position = Position::find($id);
         $parentId = $position->parent_id;
