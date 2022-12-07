@@ -174,13 +174,20 @@ class EmployeeController extends Controller
     public function getLeaderToChange(): View
     {
         $leader = Employee::find(request('id'));
+
+        $siblingsNumber =  count(Employee::where('position_id', $leader->position_id)
+                            ->whereNot('id',  $leader->id)
+                            ->get() );
+
         $subOrdinates = $this->getSubordinates();
 
-        return view('admin.employees.changeLeader', ['leader' => $leader, 'subOrdinates' => $subOrdinates]);
+        return view('admin.employees.changeLeader', ['leader' => $leader, 'subOrdinates' => $subOrdinates, 'siblingsNumber' => $siblingsNumber]);
     }
 
     public function searchLeaders(Request $request)
     {
+        
+
         $employees = Employee::where('last_name', 'LIKE', '%'.$request->input('term', '').'%')
                     ->where('position_id', $request->input('positionId'))
                     ->whereNot('id',  $request->input('id'))

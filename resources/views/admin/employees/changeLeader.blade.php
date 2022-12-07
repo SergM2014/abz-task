@@ -2,7 +2,9 @@
 
 @section('content')
 
-
+@if ($siblingsNumber<1)
+<h1>!!!!!!!!!!!!!</h1>
+@endif
 <h2>Hallo this is changeLeader</h2>
 <h3>the Leader, that You want to delete is: {{ $leader->first_name.' '.$leader->middle_name.' '.$leader->last_name }}</h3>
 <p>He has a position: {{ $leader->position_id }}</p>
