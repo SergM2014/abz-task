@@ -24,7 +24,7 @@ class EmployeeController extends Controller
     public function create()
     {
         $positions = Position::all('id', 'title');
-        //the under line must be corrected later
+        //the under line must be corrected later to view composer
         $photo = \old('photo')?? 'no-avatar.png';
        
         return view('admin.employees.create', ['positions' => $positions, 'photo' => $photo]);
@@ -57,24 +57,7 @@ class EmployeeController extends Controller
         return redirect()->route('employees.index')->with('success','A new employee is created!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function edit($id): View
     {
         $employee = Employee::findOrFail($id);
         $positions = Position::all('id', 'title');
@@ -87,10 +70,8 @@ class EmployeeController extends Controller
             'positionId' => $positionId
         ]);
     }
-
-    
+   
     public function update(UpdateEmployeeRequest $request, $id)
-  
     {
         $validated = $request->validated();
 
@@ -109,17 +90,6 @@ class EmployeeController extends Controller
         $employee->save();
 
         return redirect()->route('employees.index')->with('success','the employee#'.$id.' is updated!');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 
     public function search(Request $request): array
@@ -187,13 +157,17 @@ class EmployeeController extends Controller
 
     public function changeLeader(UpdateLeaderRequest $request)
     {
+        $validated = $request->validated();
         $subOrdinates = $this->getSubordinates(request('oldLeaderId'));
-        
+        //must change to map
         foreach($subOrdinates as $subOrdinate) {
-            $subOrdinate->leader_id = request('leaderId');
+            $subOrdinate->leader_id = $validated('leaderId');
             $subOrdinate->update();
         }
+
+        Employee::destroy(request('oldLeaderId'));
        
+        return redirect()->route('employees.index')->with('success','The employee#'.request('oldLeaderId').' was deleted!');
     }
 
     
