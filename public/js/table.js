@@ -1,5 +1,5 @@
 if (document.getElementById('employeesCard')) {
-
+    let CSRF_TOKEN = document.querySelector('meta[name="csrf-token"]').getAttribute("content");
     document.getElementById('employeesCard').addEventListener('click', function(e){
         
         let parentEl = e.target.parentElement;
@@ -21,22 +21,14 @@ if (document.getElementById('employeesCard')) {
                     } else {
                        
                         if (window.confirm('Are You shure to delete the employee?')) {
-                            // As explained above, just send back the 3 first argument from the `table:action:confirm` event when the action is confirmed
-                            Livewire.emit(
-                                'laraveltable:action:confirmed',
-                                'rowAction',
-                                'row_action_destroy',
-                                id
-                                );
+                            window.location.href = '/admin/employee/delete?id='+id;
                         }
-                    alert(`The employee #${id} is deleted!`);
-                    }
+                      }
                 })
-            }
+        }
 
             
     })
 
 }
 
-;
