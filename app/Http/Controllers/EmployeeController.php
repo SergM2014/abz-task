@@ -136,13 +136,13 @@ class EmployeeController extends Controller
     public function getLeaderToChange(): View|RedirectResponse
     {
         $subOrdinates = $this->getSubordinates();
+
         if(count($subOrdinates) < 1) {
             Employee::destroy(request('oldLeaderId'));
-       
-        return redirect()->route('employees.index')->with('success','The employee#'.request('id').' was deleted!'); 
+            return redirect()->route('employees.index')->with('success','The employee#'.request('id').' was deleted!'); 
         }
 
-        $leader = Employee::find(request('id'));
+        $leader = Employee::with('position')->find(request('id'));
 
         $siblingsNumber =  count(Employee::where('position_id', $leader->position_id)
                             ->whereNot('id',  $leader->id)

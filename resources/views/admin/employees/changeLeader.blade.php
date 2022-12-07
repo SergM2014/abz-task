@@ -14,7 +14,8 @@
    
     <h2>Hallo this is Change Leader form</h2>
     <h3>The curren Leader, that You want to delete is: {{ $leader->first_name.' '.$leader->middle_name.' '.$leader->last_name }}</h3>
-    <p>He has a position: {{ $leader->position_id }}</p>
+    {{-- <p>He has a position: {{ $leader->position_id }}</p> --}}
+    <p>He has a position: <strong>{{ $leader->position->title }}</strong></p>
     <p>But before deletion of the leader, You should pick up another Leader!</p>
     <p>You can choose among {{ $siblingsNumber }} other colleges on the given position</p>
 
