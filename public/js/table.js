@@ -15,7 +15,9 @@ if (document.getElementById('employeesCard')) {
                 .then((response) => response.json())
                 .then(function (data) {
                     if (data.length > 0) {
-                        alert('atention!!! Current Employee has suordinates!!!')
+                        if (window.confirm("Do you really want to delet the employee? He has subordinates, they should get another leader. Continue?")) {
+                            window.location.href = '/admin/change-leader?id='+id;
+                          }
                     } else {
                        
                         if (window.confirm('Are You shure to delete the employee?')) {
