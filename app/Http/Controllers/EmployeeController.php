@@ -10,18 +10,19 @@ use App\Models\Employee;
 use App\Models\Position;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 
 class EmployeeController extends Controller
 {
-    public function index()
+    public function index(): View
     {
         return view('admin.employees.index');
     }
 
-    public function create()
+    public function create(): View
     {
         $positions = Position::all('id', 'title');
         //the under line must be corrected later to view composer
@@ -36,7 +37,7 @@ class EmployeeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreEmployeeRequest $request)
+    public function store(StoreEmployeeRequest $request): RedirectResponse
     {
         $validated = $request->validated();
 
@@ -71,7 +72,7 @@ class EmployeeController extends Controller
         ]);
     }
    
-    public function update(UpdateEmployeeRequest $request, $id)
+    public function update(UpdateEmployeeRequest $request, $id): RedirectResponse
     {
         $validated = $request->validated();
 
@@ -132,20 +133,25 @@ class EmployeeController extends Controller
         return $subOrdinates;
     }
 
-    public function getLeaderToChange(): View
+    public function getLeaderToChange(): View|RedirectResponse
     {
+        $subOrdinates = $this->getSubordinates();
+        if(count($subOrdinates) < 1) {
+            Employee::destroy(request('oldLeaderId'));
+       
+        return redirect()->route('employees.index')->with('success','The employee#'.request('id').' was deleted!'); 
+        }
+
         $leader = Employee::find(request('id'));
 
         $siblingsNumber =  count(Employee::where('position_id', $leader->position_id)
                             ->whereNot('id',  $leader->id)
                             ->get() );
 
-        $subOrdinates = $this->getSubordinates();
-
         return view('admin.employees.changeLeader', ['leader' => $leader, 'subOrdinates' => $subOrdinates, 'siblingsNumber' => $siblingsNumber]);
     }
 
-    public function searchLeaders(Request $request)
+    public function searchLeaders(Request $request): array
     {
         $employees = Employee::where('last_name', 'LIKE', '%'.$request->input('term', '').'%')
                     ->where('position_id', $request->input('positionId'))
@@ -155,7 +161,7 @@ class EmployeeController extends Controller
         return ['results' => $employees];
     }
 
-    public function changeLeader(UpdateLeaderRequest $request)
+    public function changeLeader(UpdateLeaderRequest $request): RedirectResponse
     {
         $validated = $request->validated();
         $subOrdinates = $this->getSubordinates(request('oldLeaderId'));
@@ -169,6 +175,5 @@ class EmployeeController extends Controller
        
         return redirect()->route('employees.index')->with('success','The employee#'.request('oldLeaderId').' was deleted!');
     }
-
-    
+  
 }

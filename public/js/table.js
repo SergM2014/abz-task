@@ -16,7 +16,7 @@ if (document.getElementById('employeesCard')) {
                 .then(function (data) {
                     if (data.length > 0) {
                         if (window.confirm("Do you really want to delet the employee? He has subordinates, they should get another leader. Continue?")) {
-                            window.location.href = '/admin/change-leader?id='+id;
+                            window.location.href = '/admin/leader/change?id='+id;
                           }
                     } else {
                        
