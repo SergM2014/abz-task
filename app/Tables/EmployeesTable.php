@@ -3,6 +3,7 @@
 namespace App\Tables;
 
 use App\Models\Employee;
+use App\Tables\Formatters\SupremeNameFormatter;
 use Okipa\LaravelTable\Abstracts\AbstractTableConfiguration;
 use Okipa\LaravelTable\Column;
 use Okipa\LaravelTable\Formatters\DateFormatter;
@@ -28,8 +29,16 @@ class EmployeesTable extends AbstractTableConfiguration
             Column::make('first_name')->title('first name')->searchable()->sortable(),
             Column::make('middle_name')->title('middle name')->searchable()->sortable(),
             Column::make('last_name')->title('last name')->searchable()->sortable(),
-            Column::make('position_id')->title('position')->searchable()->sortable(),
-            Column::make('leader_id')->title('leader')->searchable()->sortable(),
+            Column::make('position_id')
+                        ->format(fn(Employee $employee) => $employee->position->title )
+                        ->title('position')->searchable()->sortable(),
+            Column::make('leader_id')
+                        ->format(function(Employee $employee)  {
+                            if(!$leaderId = $employee->leader_id) return '---'; 
+                            $leader = Employee::find($leaderId);
+                            return $leader->first_name.' '.$leader->middle_name.' '.$leader->last_name;
+                        })
+                        ->title('leader')->searchable()->sortable(),
             Column::make('employment_date')->title('employment_date')->searchable()->sortable(),
             Column::make('phone')->title('phone')->searchable()->sortable(),
             Column::make('email')->title('email')->searchable()->sortable(),
@@ -40,11 +49,4 @@ class EmployeesTable extends AbstractTableConfiguration
         ];
     }
 
-    // protected function results(): array
-    // {
-    //     return [
-    //         // The table results configuration.
-    //         // As results are optional on tables, you may delete this method if you do not use it.
-    //     ];
-    // }
 }

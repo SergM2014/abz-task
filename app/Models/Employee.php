@@ -13,8 +13,6 @@ class Employee extends Model
 
     protected $fillables = [];
 
-    
-
     public function position(): BelongsTo
     {
         return $this->belongsTo(Position::class);

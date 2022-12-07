@@ -31,12 +31,6 @@ class EmployeeController extends Controller
         return view('admin.employees.create', ['positions' => $positions, 'photo' => $photo]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(StoreEmployeeRequest $request): RedirectResponse
     {
         $validated = $request->validated();
@@ -163,7 +157,6 @@ class EmployeeController extends Controller
 
     public function changeLeader(UpdateLeaderRequest $request): RedirectResponse
     {
-        $validated = $request->validated();
         $subOrdinates = $this->getSubordinates(request('oldLeaderId'));
         //must change to map
         foreach($subOrdinates as $subOrdinate) {
