@@ -2,7 +2,7 @@ $(document).ready(function () {
     if( $('#leaderIdSelect')){
 
         searchEmployee();
-//only if edit form
+//only for edit form
     if ($('#leaderId').hasClass('update') ){
       getLeader();
     }
@@ -13,6 +13,11 @@ $(document).ready(function () {
             $('#leaderIdSelect').val(null).trigger('change');
           })
         }
+    }
+
+    if ($('#anotherLeaderIdSelect')) {
+      
+      searchOtherLeaders();
     }
   });
 
@@ -64,4 +69,28 @@ $(document).ready(function () {
                  }
              });
      });
+  }
+
+  function searchOtherLeaders()
+  {
+    let positionId = $('#positionId').val();
+    let employeeId = $('#employeeId').val();
+
+    $('#anotherLeaderIdSelect').select2({
+
+        minimumInputLength: 3,
+        ajax: {
+            url: '/api/employee/search/leaders',
+            dataType: 'json',
+            data: function (params) {
+                var query = {
+                  term: params.term,
+                  positionId: positionId,
+                  id: employeeId,
+                }
+                // Query parameters will be ?term=[term]&positionId=[positionId]
+                return query;
+              }
+        },
+    });
   }

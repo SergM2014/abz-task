@@ -9,7 +9,9 @@ use App\Models\Employee;
 use App\Models\Position;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
+use Illuminate\View\View;
 
 class EmployeeController extends Controller
 {
@@ -161,12 +163,30 @@ class EmployeeController extends Controller
        return $parentId; 
     }
 
-    public function getSubordinates(Request $request): Collection
+    public function getSubordinates(): Collection
     {
         $id = request('id');
         $subOrdinates = Employee::where('leader_id', $id)->get();
 
         return $subOrdinates;
+    }
+
+    public function getLeaderToChange(): View
+    {
+        $leader = Employee::find(request('id'));
+        $subOrdinates = $this->getSubordinates();
+
+        return view('admin.employees.changeLeader', ['leader' => $leader, 'subOrdinates' => $subOrdinates]);
+    }
+
+    public function searchLeaders(Request $request)
+    {
+        $employees = Employee::where('last_name', 'LIKE', '%'.$request->input('term', '').'%')
+                    ->where('position_id', $request->input('positionId'))
+                    ->whereNot('id',  $request->input('id'))
+                    ->get(['id', DB::raw("CONCAT(first_name, ' ', middle_name ,' ', last_name) as text")]);
+
+        return ['results' => $employees];
     }
 
     
