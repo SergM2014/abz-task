@@ -167,7 +167,7 @@ class EmployeeController extends Controller
         $subOrdinates = $this->getSubordinates(request('oldLeaderId'));
         //must change to map
         foreach($subOrdinates as $subOrdinate) {
-            $subOrdinate->leader_id = $validated('leaderId');
+            $subOrdinate->leader_id = request('leaderId');
             $subOrdinate->update();
         }
 
