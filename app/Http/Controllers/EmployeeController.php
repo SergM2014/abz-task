@@ -100,7 +100,6 @@ class EmployeeController extends Controller
 
     public function getLeader(Request $request): JsonResponse
     {
-
         if (!request('leaderId')) {
             return response()->json(['id' => 0, 'text' => 'it is the highest hierachical level! No suprem positions at all!']);
         }

@@ -62,12 +62,12 @@ $(document).ready(function(){
     });
 
     $('#deleteImage').click(function(){
-      if (!$('#employeePhoto').val()) return;
+      if ($('#employeePhoto').val() == 'no-avatar.png') return;
 
-        $('#filepreview img').attr('src', window.location.origin+'/storage/no-avatar.png');
+        $('#filepreview img').attr('src', window.location.origin+'/storage/uploads/thumbs/no-avatar.png');
         document.getElementById('image').value = '';
        
-        $('#employeePhoto').val('');
+        $('#employeePhoto').val('no-avatar.png');
         createAlert('image Is Deleted!', 'alert-danger');
         $('#rotateControlBlock').addClass('d-none');
   })
