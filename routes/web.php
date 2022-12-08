@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\PositionController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +22,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::prefix('admin')->group(function () {
     Route::resource('employees', EmployeeController::class);
 
@@ -29,4 +31,6 @@ Route::prefix('admin')->group(function () {
     Route::get('/leader/change', [ EmployeeController::class, 'getLeaderToChange'] )->name('employees.changeLeaderForm');
 
     Route::post('/leader/change', [ EmployeeController::class, 'changeLeader'])->name('employees.leader.change');
+
+    Route::resource('positions', PositionController::class);
 });  

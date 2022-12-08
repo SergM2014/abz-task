@@ -98,7 +98,7 @@
               </a>
             </li>
             <li id="showPositionsTable" class="nav-item">
-              <a href="#" class="nav-link" >
+              <a href="{{ route('positions.index') }}" class="nav-link" >
                 <i class="fas fa-circle nav-icon"></i>
                 <p>
                   Positions
