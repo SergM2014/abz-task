@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('positions', function (Blueprint $table) {
             $table->id();
+            $table->integer('subordinary_level');
             $table->string('title');
             $table->text('description');
             $table->integer('parent_id')->nullable();
