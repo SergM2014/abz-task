@@ -32,7 +32,7 @@ class StoreEmployeeRequest extends FormRequest
             'positionId'=> 'required',
             'leaderId'  => 'required',
             'employmentDate' => 'date',
-            'phone'     =>  ['unique:employees',new ValidatePhone],
+            'phone'     =>  ['unique:employees', new ValidatePhone],
             'email'     => 'required|email',
             'salary'    => new ValidateSalary,
         ];
