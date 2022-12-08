@@ -98,18 +98,6 @@ class EmployeeController extends Controller
         return ['results' => $employees];
     }
 
-    public function getSelectedLeader($id): JsonResponse
-    {
-        if (!$id) {
-            return response()->json(['id' => 0, 'text' => 'it is the highest hierachical level! No suprem positions at all!']);
-        }
-
-        $leader = Employee::where('id', $id)
-                ->first(['id', DB::raw("CONCAT(first_name, ' ', middle_name ,' ', last_name) as text")]);
-
-         return response()->json(['id' => $leader->id, 'text' => $leader->text]);
-    }
-
     public function getLeader(Request $request): JsonResponse
     {
 

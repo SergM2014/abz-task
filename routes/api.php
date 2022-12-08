@@ -24,9 +24,7 @@ Route::get('employee/search', [EmployeeController::class, 'search'])
     ->name('api.employees.search');
 Route::get('employee/search/leaders', [EmployeeController::class, 'searchLeaders'])
     ->name('api.employees.search.leaders');
-// Route::get('employee/leader/{id}', [EmployeeController::class, 'getLeader'])
-//     ->name('api.employees.search');
-Route::get('employee/leader/{id}', [EmployeeController::class, 'getSelectedLeader'])
+Route::get('employee/leader', [EmployeeController::class, 'getLeader'])
     ->name('api.employees.search');
 Route::get('employee/subordinates', [EmployeeController::class, 'getSubordinates'])
     ->name('api.employees.subordinates');

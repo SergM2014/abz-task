@@ -3,10 +3,9 @@ $(document).ready(function () {
     if( $('#leaderIdSelect')){
 
       searchEmployee();
-//only for edit form
-    // if ($('#leaderId').hasClass('update') ){
+
       if ($('#leaderId').val() ){
-         getLeader();
+         getSelectedLeader();
       }
         
     if(document.getElementById("positionId")) {
@@ -41,13 +40,13 @@ $(document).ready(function () {
     });
   }
 
-  function getLeader()
+  function getSelectedLeader()
   {
      let leaderSelect = $('#leaderIdSelect');
      // Fetch the preselected item, and add to the control
      let id = $('#leaderId').val();
 
-     fetch( '/api/employee/leader/' + id,
+     fetch( '/api/employee/leader?leaderId=' + id,
              { method: 'GET',
              credentials:'same-origin'
          })
