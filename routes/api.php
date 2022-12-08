@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ImageController;
+use App\Http\Controllers\PositionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,3 +33,6 @@ Route::get('employee/subordinates', [EmployeeController::class, 'getSubordinates
 
 Route::post('image/store', [ImageController::class, 'store'])->name('image.store');
 Route::post('image/rotate', [ImageController::class, 'rotate'])->name('image.rotate');
+
+Route::get('position/search', [PositionController::class, 'search'])
+    ->name('api.positions.search');

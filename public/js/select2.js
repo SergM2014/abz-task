@@ -3,10 +3,7 @@ $(document).ready(function () {
     if( $('#leaderIdSelect')){
 
       searchEmployee();
-
-     
       getSelectedLeader();
-     
         
     if(document.getElementById("positionId")) {
         document.getElementById("positionId").addEventListener('change', function (e) {
@@ -90,5 +87,31 @@ $(document).ready(function () {
                 return query;
               }
         },
+    });
+  }
+
+
+  if($('#parentIdSelect')) {
+    searchSupremePositions();
+  }
+
+  function searchSupremePositions()
+  {
+    $('#parentIdSelect').select2({
+
+        minimumInputLength: 3,
+        ajax: {
+            url: '/api/position/search',
+            dataType: 'json',
+            data: function (params) {
+                var query = {
+                  term: params.term,
+                  subordinaryLevel: $('#subordinaryLevel').val()
+                }
+                // Query parameters will be ?term=[term]&positionId=[positionId]
+                return query;
+              }
+        },
+        
     });
   }

@@ -8,7 +8,7 @@
   
 <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 <div class="form-group">
-  <label for="subordinaryLevel">Position select</label>
+  <label for="subordinaryLevel">Subordinary level select</label>
   <select class="form-control <?= $errors->has('subordinaryLevel')? 'is-invalid' : '' ?>"
    id="subordinaryLevel"  name="subordinaryLevel">
    @foreach  ($positions as $position)
