@@ -22,6 +22,7 @@ class ValidatePhone implements InvokableRule
         if (!preg_match('/^([\+]\d{2}[\(]\d{3}[\)]\d{7})$/', $value)
             AND !preg_match('/^([\+]\d{2}[\(]\d{5}[\)]\d{5})$/', $value)
             AND !preg_match('/^([\+]\d{2}[\(]\d{4}[\)]\d{6})$/', $value)
+            AND !preg_match('/^\d{10}$/', $value)
             AND !preg_match('/^\d{7}$/', $value)
         ) $error = 'format is not corect!';
 

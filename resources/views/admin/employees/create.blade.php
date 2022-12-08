@@ -57,7 +57,7 @@
   <div class="form-group">
     <label for="phone">Phone</label>
     <div class="text-red">
-    <small>Put phone only in following formats: +38(066)1234567 +38(0661)123456 +38(06612)12345 5654995</small>
+    <small>Put phone only in following formats: +38(066)1234567 +38(0661)123456 +38(06612)12345 0501234567 1234567</small>
     </div>
     <input type="tel" class="form-control <?= $errors->has('phone')? 'is-invalid' : '' ?>" 
     name="phone" id="phone" value="{{ old('phone') }}" placeholder="Phone"
