@@ -24,17 +24,22 @@ class PositionsTable extends AbstractTableConfiguration
     protected function columns(): array
     {
         return [
-            Column::make('id')->sortable(),
-            Column::make('created_at')->format(new DateFormatter('d/m/Y H:i'))->sortable(),
-            Column::make('updated_at')->format(new DateFormatter('d/m/Y H:i'))->sortable()->sortByDefault('desc'),
+            Column::make('id')->title('id')->sortable(),
+            Column::make('title')->title('title')->searchable()->sortable(),
+            Column::make('description')->title('description'),
+            Column::make('parent_id')
+                        ->format(function(Position $position)  {
+                            if(!$parentId = $position->parent_id) return '---'; 
+                            $position = Position::find($parentId);
+                            return $position->title;
+                        })
+                        ->title('superior_position')->searchable()->sortable(),
+            Column::make('created_at')->title('created at')->format(new DateFormatter('d/m/Y H:i'))->sortable(),
+            Column::make('updated_at')->title('updated at')->format(new DateFormatter('d/m/Y H:i'))->sortable()->sortByDefault('desc'),
+            Column::make('admin_created_at')->title('created by')->format(new DateFormatter('d/m/Y H:i'))->sortable(),
+            Column::make('admin_updated_at')->title('updated by')->format(new DateFormatter('d/m/Y H:i'))->sortable()->sortByDefault('desc'),
         ];
     }
 
-    protected function results(): array
-    {
-        return [
-            // The table results configuration.
-            // As results are optional on tables, you may delete this method if you do not use it.
-        ];
-    }
+
 }
