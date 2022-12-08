@@ -4,9 +4,10 @@ $(document).ready(function () {
 
       searchEmployee();
 //only for edit form
-    if ($('#leaderId').hasClass('update') ){
-      getLeader();
-    }
+    // if ($('#leaderId').hasClass('update') ){
+      if ($('#leaderId').val() ){
+         getLeader();
+      }
         
     if(document.getElementById("positionId")) {
         document.getElementById("positionId").addEventListener('change', function (e) {
@@ -36,6 +37,7 @@ $(document).ready(function () {
                 return query;
               }
         },
+        
     });
   }
 

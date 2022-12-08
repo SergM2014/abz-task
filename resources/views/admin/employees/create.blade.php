@@ -74,7 +74,7 @@
   <div class="form-group">
     <label for="salary">Salary</label>
     <div class="text-red">
-    <small>if sum is decimal, use  delimeter -comma, after comma 3 numbers are allowed. the max sum is 500,000 </smal>
+    <small>if sum is decimal, use  delimeter -comma, after comma 3 numbers are allowed. the max sum is 500,000 </small>
     </div>
     <input type="number" class="form-control <?= $errors->has('salary')? 'is-invalid' : '' ?>"
      name="salary" id="salary" value="{{ old('salary') }}" placeholder="Salary" 
