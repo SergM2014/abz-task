@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Position;
 use Illuminate\Http\Request;
 
 class PositionController extends Controller
@@ -23,7 +24,8 @@ class PositionController extends Controller
      */
     public function create()
     {
-        //
+        $positions = Position::all();
+        return view('admin.positions.create', ['positions' => $positions]);
     }
 
     /**
