@@ -23,24 +23,19 @@ $(document).ready(function(){
           dataType: 'json',
           success: function(response){
 
-            // Hide error container
-            $('#err_file').removeClass('d-block');
-            $('#err_file').addClass('d-none');
-
             if(response.success == 1){ // Uploaded successfully
             createAlert(response.message, 'alert-success')
 
              // File preview
-            $('#filepreview').show();
+           
             $('#filepreview img').attr('src', window.location.origin+'/storage/uploads/thumbs/'+response.savedFile);
             $('#rotateControlBlock').removeClass('d-none');
-            
           
             $('#employeePhoto').val(response.savedFile);
                
              }else if(response.success == 2){ // File not uploaded
 
-              $('#employeePhoto').val('');
+              $('#employeePhoto').val('no-photo.png');
                // Response message
                createAlert(response.message, 'alert-danger');
                $('#rotateControlBlock').addClass('d-none');
@@ -55,7 +50,7 @@ $(document).ready(function(){
               console.log("error : " + JSON.stringify(response) );
            }
          });
-      }else{
+       } else {
         createAlert('Select a file!', 'alert-danger');
       }
 

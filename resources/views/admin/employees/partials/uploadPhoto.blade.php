@@ -3,7 +3,10 @@
         <input type="hidden" name="photo" id="employeePhoto" value="{{ $photo }}">
     <!-- File preview --> 
     <div id="filepreview" class="mb-3" > 
-        <img src="{{ asset('storage/uploads/thumbs/'.$photo) }}" class="rounded border border-primary" with="150px" height="150px">
+        <img src="{{ asset('storage/uploads/thumbs/'.$photo) }}" 
+        class="rounded border border-primary"
+         with="150px" height="150px"
+         onError="this.onerror=null;this.src='{{ asset('storage/uploads/thumbs/no-avatar.png') }}';" >
         
         </div>
 
@@ -19,7 +22,7 @@
     </div>
 
     <div class="form-group">
-        <div class="col-md-6">
+        <div id="uploadControlBlock" class="col-md-6">
             <input type="button" id="uploadImage" value='Upload Image' class='btn btn-success'>
             <button type="button" class="btn btn-danger" id="deleteImage" >Delete Image</button>
         </div>
