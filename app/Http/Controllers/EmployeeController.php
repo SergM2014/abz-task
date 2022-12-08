@@ -37,7 +37,7 @@ class EmployeeController extends Controller
 
         $employee = new Employee();
         $employee-> first_name = $validated['firstName'];
-        $employee-> middle_name = $validated['middleName']? : null;
+        $employee-> middle_name = $validated['middleName'];
         $employee-> last_name = $validated['lastName'];
         $employee->position_id = $validated['positionId'];
         $employee->leader_id = $validated['leaderId'];

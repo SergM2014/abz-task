@@ -4,9 +4,9 @@ $(document).ready(function () {
 
       searchEmployee();
 
-      if ($('#leaderId').val() ){
-         getSelectedLeader();
-      }
+     
+      getSelectedLeader();
+     
         
     if(document.getElementById("positionId")) {
         document.getElementById("positionId").addEventListener('change', function (e) {
@@ -45,6 +45,7 @@ $(document).ready(function () {
      let leaderSelect = $('#leaderIdSelect');
      // Fetch the preselected item, and add to the control
      let id = $('#leaderId').val();
+     if (!id) id = 0;
 
      fetch( '/api/employee/leader?leaderId=' + id,
              { method: 'GET',
