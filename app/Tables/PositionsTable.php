@@ -25,6 +25,7 @@ class PositionsTable extends AbstractTableConfiguration
     {
         return [
             Column::make('id')->title('id')->sortable(),
+            Column::make('subordinary_level')->title('subordinaty_level')->sortable(),
             Column::make('title')->title('title')->searchable()->sortable(),
             Column::make('description')->title('description'),
             Column::make('parent_id')
