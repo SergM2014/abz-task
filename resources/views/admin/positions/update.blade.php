@@ -11,9 +11,9 @@
   <label for="subordinaryLevel">Subordinary level select</label>
   <select class="form-control <?= $errors->has('subordinaryLevel')? 'is-invalid' : '' ?>"
    id="subordinaryLevel"  name="subordinaryLevel">
-   @foreach  ($positions as $position)
-    <option {{ old('subordinaryLevel') == $position->subordinary_level ? "selected" : "" }}
-       value= "{{ $position->subordinary_level }}" >{{ $position->subordinary_level }}</option>
+   @foreach  ($subordinaryLevels as $level)
+    <option {{ $subordinaryLevel == $level ? "selected" : "" }}
+       value= "{{ $level }}" >{{ $level }}</option>
     @endforeach
   </select>
   <div class="invalid-feedback"><?= $errors->first('subordinaryLevel') ?></div>
@@ -40,7 +40,7 @@
   </div>
  
   <div class="text-center">
-    <button type="submit" class="btn btn-primary mb-2 btn-lg">Create a new User</button>
+    <button type="submit" class="btn btn-primary mb-2 btn-lg">Update Position</button>
   </div>
 </form>                   
                 

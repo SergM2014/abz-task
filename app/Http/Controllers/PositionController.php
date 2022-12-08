@@ -72,13 +72,13 @@ class PositionController extends Controller
      */
     public function edit($id): View
     {
+        $subordinaryLevels = Position::groupBy('subordinary_level')->pluck('subordinary_level');
         $position = Position::find($id);
-        $positions = Position::all();
         $subordinaryLevel = old('subordinaryLevel')?? $position->subordinary_level;
 
         return view('admin.positions.update', [
             'position' => $position,
-            'positions' => $positions,
+            'subordinaryLevels' => $subordinaryLevels,
             'subordinaryLevel' => $subordinaryLevel
             ]);
     }
