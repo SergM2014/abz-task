@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreatePositionRequest;
 use App\Models\Position;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\View\View;
@@ -107,6 +108,18 @@ class PositionController extends Controller
                     ->get(['id', 'title as text']);
 
         return ['results' => $employees];
+    }
+
+    public function getSupremePosition(Request $request): JsonResponse
+    {
+        if (!request('parentId')) {
+            return response()->json(['id' => 0, 'text' => 'it is the highest hierachical level! No suprem positions at all!']);
+        }
+
+        $position = Position::where('id', request('parentId'))
+                ->first(['id', 'title as text']);
+
+         return response()->json(['id' => $position->id, 'text' => $position->text]);
     }
 
     

@@ -36,3 +36,5 @@ Route::post('image/rotate', [ImageController::class, 'rotate'])->name('image.rot
 
 Route::get('position/search', [PositionController::class, 'search'])
     ->name('api.positions.search');
+Route::get('position/supreme', [PositionController::class, 'getSupremePosition'])
+    ->name('api.positions.supreme');

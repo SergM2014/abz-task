@@ -3,7 +3,10 @@ $(document).ready(function () {
     if( $('#leaderIdSelect')){
 
       searchEmployee();
-      getSelectedLeader();
+      if (('#leaderId').val()) {
+        getSelectedLeader();
+      }
+     
         
     if(document.getElementById("positionId")) {
         document.getElementById("positionId").addEventListener('change', function (e) {
@@ -93,6 +96,9 @@ $(document).ready(function () {
 
   if($('#parentIdSelect')) {
     searchSupremePositions();
+    if ($('#parentId').val()){
+     getSelectedSupremePosition();
+    }
   }
 
   function searchSupremePositions()
@@ -114,4 +120,33 @@ $(document).ready(function () {
         },
         
     });
+  }
+
+  function getSelectedSupremePosition()
+  {
+    let selectedPosition = $('#parentIdSelect');
+     // Fetch the preselected item, and add to the control
+     let id = $('#parentId').val();
+     if (!id) id = 0;
+
+     fetch( '/api/position/supreme?parentId=' + id,
+             { method: 'GET',
+             credentials:'same-origin'
+         })
+         .then((response) => response.json())
+         .then(function (data) {
+
+             // create the option and append to Select2
+             let option = new Option(data.text, data.id,  true, true);
+
+             selectedPosition.append(option).trigger('change');
+
+             // manually trigger the `select2:select` event
+             selectedPosition.trigger({
+                 type: 'select2:select',
+                 params: {
+                     data: data
+                 }
+             });
+     });
   }
