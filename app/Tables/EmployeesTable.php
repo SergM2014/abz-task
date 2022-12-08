@@ -43,7 +43,13 @@ class EmployeesTable extends AbstractTableConfiguration
             Column::make('phone')->title('phone')->searchable()->sortable(),
             Column::make('email')->title('email')->searchable()->sortable(),
             Column::make('salary')->title('salary')->searchable()->sortable(),
-            Column::make('photo')->title('photo')->sortable(),
+            Column::make('photo')
+                        ->format(function(Employee $employee)
+                         {
+                            $photo =  asset('storage/uploads/thumbs/'.$employee->photo);
+                            return '<img src='.$photo.' class="mw-100" >';
+                         } )
+                        ->title('photo')->sortable(),
             Column::make('created_at')->title('created at')->format(new DateFormatter('d/m/Y H:i'))->sortable(),
             Column::make('updated_at')->title('updated at')->format(new DateFormatter('d/m/Y H:i'))->sortable()->sortByDefault('desc'),
         ];
