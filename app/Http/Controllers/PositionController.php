@@ -70,9 +70,17 @@ class PositionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id): View
     {
-        //
+        $position = Position::find($id);
+        $positions = Position::all();
+        $subordinaryLevel = old('subordinaryLevel')?? $position->subordinary_level;
+
+        return view('admin.positions.update', [
+            'position' => $position,
+            'positions' => $positions,
+            'subordinaryLevel' => $subordinaryLevel
+            ]);
     }
 
     /**
