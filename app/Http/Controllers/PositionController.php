@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreatePositionRequest;
+use App\Http\Requests\PositionRequest;
 use App\Models\Position;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -28,8 +28,8 @@ class PositionController extends Controller
      */
     public function create(): View
     {
-        $positions = Position::all();
-        return view('admin.positions.create', ['positions' => $positions]);
+        $subordinaryLevels = Position::groupBy('subordinary_level')->pluck('subordinary_level');
+        return view('admin.positions.create', ['subordinaryLevels' => $subordinaryLevels]);
     }
 
     /**
@@ -38,7 +38,7 @@ class PositionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CreatePositionRequest $request)
+    public function store(PositionRequest $request)
     {
         $validated = $request->validated();
 
@@ -47,6 +47,7 @@ class PositionController extends Controller
         $position->title = $validated['title'];
         $position->description = $validated['description'];
         $position->parent_id = $validated['parentId'];
+        $position->admin_created_id = $request->user()->id;
 
         $position->save();
 
@@ -90,9 +91,20 @@ class PositionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PositionRequest $request, $id)
     {
-        //
+        $validated = $request->validated();
+
+        $position = Position::find($id);
+        $position->subordinary_level = $validated['subordinaryLevel'];
+        $position->title = $validated['title'];
+        $position->description = $validated['description'];
+        $position->parent_id = $validated['parentId'];
+        $position->admin_updated_id = $request->user()->id;
+
+        $position->save();
+
+        return redirect()->route('positions.index')->with('success','A new position'.$id.' was updated!');
     }
 
     /**
