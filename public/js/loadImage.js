@@ -110,7 +110,6 @@ $(document).ready(function(){
       success: function(response){
         $('#filepreview img').attr('src', window.location.origin+'/storage/uploads/thumbs/'+response.photo);
         $('#employeePhoto').val(response.photo);
-        createAlert(response.message, 'alert-success');
       },
       error: function(response){
         createAlert('smthing went wrong!', 'alert-danger')
