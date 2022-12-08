@@ -41,6 +41,16 @@ class PositionController extends Controller
     public function store(CreatePositionRequest $request)
     {
         $validated = $request->validated();
+
+        $position = new Position;
+        $position->subordinary_level = $validated['subordinaryLevel'];
+        $position->title = $validated['title'];
+        $position->description = $validated['description'];
+        $position->parent_id = $validated['parentId'];
+
+        $position->save();
+
+        return redirect()->route('positions.index')->with('success','A new position is created!');
     }
 
     /**

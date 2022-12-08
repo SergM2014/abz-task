@@ -24,7 +24,7 @@ class CreatePositionRequest extends FormRequest
     public function rules()
     {
         return [
-            'subordinary_level' => 'required',
+            'subordinaryLevel' => 'required',
             'title' => 'required|min:3',
             'description' => 'required|min:3',
             'parentId' => 'required'
