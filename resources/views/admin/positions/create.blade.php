@@ -32,20 +32,12 @@
     <div class="invalid-feedback"><?= $errors->first('description') ?></div>
   </div>
   
-  
-  
-
   <div class="form-group">
     <label for="parentId">Supreme position select</label>
     <input type="hidden"  id="parentId" value="{{ old('parentId') }}" >
     <select name="parentId" id="parentIdSelect" class="form-control <?= $errors->has('parentId')? 'is-invalid' : '' ?> select2" ></select>
     <div class="invalid-feedback"><?= $errors->first('parentId') ?></div>
   </div>
-
-  
-  
-
-  
  
   <div class="text-center">
     <button type="submit" class="btn btn-primary mb-2 btn-lg">Create a new User</button>

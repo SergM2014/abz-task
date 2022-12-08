@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreatePositionRequest;
 use App\Models\Position;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\View\View;
 
 class PositionController extends Controller
 {
@@ -22,7 +25,7 @@ class PositionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(): View
     {
         $positions = Position::all();
         return view('admin.positions.create', ['positions' => $positions]);
@@ -34,9 +37,9 @@ class PositionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreatePositionRequest $request)
     {
-        //
+        $validated = $request->validated();
     }
 
     /**
