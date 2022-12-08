@@ -1,23 +1,23 @@
 $(document).ready(function () {
   
-    if( $('#leaderIdSelect')){
+    if( $('#leaderIdSelect').length){
 
       searchEmployee();
       if (('#leaderId').val()) {
         getSelectedLeader();
       }
-     
-        
-    if(document.getElementById("positionId")) {
-        document.getElementById("positionId").addEventListener('change', function (e) {
-            $('#leaderIdSelect').val(null).trigger('change');
-          })
-        }
     }
 
-    if ($('#anotherLeaderIdSelect')) searchOtherLeaders();
-     
+    if ($('#anotherLeaderIdSelect').length) searchOtherLeaders();
   });
+
+    if(document.getElementById("positionId")) {
+      document.getElementById("positionId").addEventListener('change', function (e) {
+        if($('#leaderIdSelect')){
+          $('#leaderIdSelect').val(null).trigger('change');
+        }
+      })
+    }
 
   function searchEmployee()
   {
@@ -94,11 +94,19 @@ $(document).ready(function () {
   }
 
 
-  if($('#parentIdSelect')) {
+  if($('#parentIdSelect').length) {
+
     searchSupremePositions();
     if ($('#parentId').val()){
      getSelectedSupremePosition();
     }
+  }
+  if(document.getElementById("subordinaryLevel")) {
+    document.getElementById("subordinaryLevel").addEventListener('change', function (e) {
+      if($('#parentIdSelect')){
+        $('#parentIdSelect').val(null).trigger('change');
+      }
+    })
   }
 
   function searchSupremePositions()
