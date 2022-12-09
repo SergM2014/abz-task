@@ -111,27 +111,7 @@ $(document).ready(function () {
       }
     })
   }
-//might be useles
-  function searchSupremePositions()
-  {
-    $('#parentIdSelect').select2({
 
-        minimumInputLength: 3,
-        ajax: {
-            url: '/api/position/search',
-            dataType: 'json',
-            data: function (params) {
-                var query = {
-                  term: params.term,
-                  subordinaryLevel: $('#subordinaryLevel').val()
-                }
-                // Query parameters will be ?term=[term]&positionId=[positionId]
-                return query;
-              }
-        },
-        
-    });
-  }
 //might be useless
   function getSelectedSupremePosition()
   {
@@ -180,34 +160,43 @@ $(document).ready(function () {
          .then((response) => response.json())
          .then(function (data) {
 
-          let selectedId = $('supremePositionId').val();
+          let selectedId = $('#supremePositionId').val();
 
           let selected = false;
-          if (selectedId) {  selected = selectedId}
+          if (selectedId) {  selected = Number(selectedId)}
 
+          let selectedOption =false;
           data.results.forEach(function(item) {
             if (typeof selected === 'number') {
+
               if(item.id == selected ) {
-               
+             
                 selected = true;
+                selectedOption = new Option(item.text, item.id,  selected, true);
+                selected = false;
+                
               }
             }
 
-            let option = new Option(item.text, item.id,  selected, true);
+            if (!selectedOption) { 
+              let option = new Option(item.text, item.id,  selected, true); 
 
-            if(typeof selected != 'number') selected = false;
+               if(typeof selected != 'number') selected = false;
 
-            supremePositionSelect.append(option).trigger('change');
+               supremePositionSelect.append(option).trigger('change');
+            }
           })
+
+          supremePositionSelect.append(selectedOption).trigger('change');
           
 
              // manually trigger the `select2:select` event
-             supremePositionSelect.trigger({
-                 type: 'select2:select',
-                 params: {
-                     data: data
-                 }
-             });
+            //  supremePositionSelect.trigger({
+            //      type: 'select2:select',
+            //      params: {
+            //          data: data
+            //      }
+            //  });
              //supremePositionSelect.select2('open');
      });
   }
