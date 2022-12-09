@@ -7,6 +7,7 @@
 <form class="m-3" method="post" action="{{ route('positions.store') }}">
   
 <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+
 <div class="form-group">
   <label for="subordinaryLevel">Subordinary level select</label>
   <select class="form-control <?= $errors->has('subordinaryLevel')? 'is-invalid' : '' ?>"
@@ -18,13 +19,14 @@
   </select>
   <div class="invalid-feedback"><?= $errors->first('subordinaryLevel') ?></div>
 </div>
-  <div class="form-group">
-    <label for="title">Title</label>
-    <input type="text" class="form-control <?= $errors->has('title')? 'is-invalid' : '' ?>" 
-    name="title" id="title" value="{{ old('title') }}" placeholder="title"
-   >
-   <div class="invalid-feedback"><?= $errors->first('title') ?></div>
-  </div>
+
+<div class="form-group">
+  <label for="title">Title</label>
+  <input type="text" class="form-control <?= $errors->has('title')? 'is-invalid' : '' ?>" 
+  name="title" id="title" value="{{ old('title') }}" placeholder="title"
+  >
+  <div class="invalid-feedback"><?= $errors->first('title') ?></div>
+</div>
   <div class="form-group">
     <label for="description">Description</label>
     <textarea class="form-control <?= $errors->has('description')? 'is-invalid' : '' ?>" 
@@ -33,10 +35,10 @@
   </div>
   
   <div class="form-group">
-    <label for="parentId">Supreme position select</label>
-    <input type="hidden"  id="parentId" value="{{ old('parentId') }}" >
-    <select name="parentId" id="parentIdSelect" class="form-control <?= $errors->has('parentId')? 'is-invalid' : '' ?> select2" ></select>
-    <div class="invalid-feedback"><?= $errors->first('parentId') ?></div>
+    <label for="supremeLevelId">Supreme position select</label>
+    <input type="hidden"  id="supremeLevelId" value="{{ old('supremeLevelId') }}" >
+    <select name="supremeLevelId" id="supremeLevelId" class="form-control <?= $errors->has('supremeLevelId')? 'is-invalid' : '' ?> select2" ></select>
+    <div class="invalid-feedback"><?= $errors->first('supremeLevelId') ?></div>
   </div>
  
   <div class="text-center">
