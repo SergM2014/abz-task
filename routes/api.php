@@ -41,3 +41,5 @@ Route::post('position/supremes', [PositionController::class, 'getSupremePosition
     ->name('api.positions.supremes');
 Route::get('position/subpositions', [PositionController::class, 'getSubPositions'])
     ->name('api.positions.subpositions');
+Route::get('position/employees', [PositionController::class, 'getEmployees'])
+    ->name('api.positions.employees');

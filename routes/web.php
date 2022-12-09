@@ -31,6 +31,8 @@ Route::prefix('admin')->group(function () {
     Route::get('/leader/change', [ EmployeeController::class, 'getLeaderToChange'] )->name('employees.changeLeaderForm');
 
     Route::post('/leader/change', [ EmployeeController::class, 'changeLeader'])->name('employees.leader.change');
-
+    
+    Route::get('/positions/delete', [PositionController::class, 'delete']);
+    
     Route::resource('positions', PositionController::class);
 });  

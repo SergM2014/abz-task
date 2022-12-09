@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreatePositionRequest;
 use App\Http\Requests\UpdatePositionRequest;
+use App\Models\Employee;
 use App\Models\Position;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -116,9 +117,15 @@ class PositionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id)//: RedirectResponse
     {
-        //
+        //$destroyed = Employee::destroy(request('id'));
+        
+        //return redirect()->route('positions.index')->with('success','The position#'.request('id').' was deleted!');
+        return response()->json([
+            'message' => 'AThe Position#'.request('id').' is deleted', 
+            'success' => true
+        ]);
     }
 
     public function getSupremePositions(Request $request): array
@@ -134,11 +141,9 @@ class PositionController extends Controller
          return ['results' => $positions];
     }
 
-    public function getSubPositions()
-    {
-        $subPositions = Position::where('parent_id', request('id'))->get();
-    
-        $positionNumber = count($subPositions);
+    public function getSubPositions():JsonResponse
+    {    
+        $positionNumber = count(Position::where('parent_id', request('id'))->get());
 
         if($positionNumber > 0) {
             return response()->json([
@@ -150,5 +155,27 @@ class PositionController extends Controller
             'message' => 'Are You shure to delete the Position#'.request('id').'?', 
             'success' => true
         ]);
+    }
+
+    public function getEmployees()
+    {
+        $employeesNumber = count(Employee::where('position_id', request('id'))->get());
+
+        if($employeesNumber > 0) {
+            return response()->json([
+                'message' => 'Attention! Position has '.$employeesNumber.' employee(s)', 
+                'success' => false
+            ]);
+        }
+        return response()->json([
+            'message' => 'Are You shure to delete the Position#'.request('id').'?', 
+            'success' => true
+        ]);
+    }
+
+    public function delete(): RedirectResponse
+    { 
+        return redirect()->route('positions.index')
+        ->with('success','The position#'.request('id').' was deleted!');  
     }
 }

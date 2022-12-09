@@ -50,11 +50,37 @@ if (document.getElementById('positionsCard')) {
                 credentials: 'same-origin'
             })
             .then((response) => response.json())
-            .then(function(data) {
-console.log(data);
-                if(data.success) {
+            .then(function(subPositions) {
 
+                if(subPositions.success) {
+                    fetch('/api/position/employees?id='+id,
+                    {
+                        method: "GET",
+                        credentials: 'same-origin'
+                    })
+                    .then((response) => response.json())
+                    .then(function(employees) {
+                        if(employees.success) {
+                            if (window.confirm('Are You shure to delete the position?')) {
 
+                                let fd = new FormData;
+                                fd.append('_token', CSRF_TOKEN);
+                                fd.append('_method', 'delete');
+                                fd.append('id', id);
+
+                                fetch('/admin/positions/'+id,
+                                {
+                                    body: fd,
+                                    method: "POST",
+                                    credentials: 'same-origin'
+                                })
+                                .then((response) => response.json())
+                                .then(function(deleteStatus) {
+                                    window.location.href = '/admin/positions/delete?id='+id;
+                                })
+                                }
+                        }
+                    })
 
                 }
             })
