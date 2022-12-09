@@ -111,7 +111,7 @@ $(document).ready(function () {
       }
     })
   }
-
+//might be useles
   function searchSupremePositions()
   {
     $('#parentIdSelect').select2({
@@ -132,7 +132,7 @@ $(document).ready(function () {
         
     });
   }
-
+//might be useless
   function getSelectedSupremePosition()
   {
     let selectedPosition = $('#parentIdSelect');

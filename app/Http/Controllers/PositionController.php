@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\PositionRequest;
+use App\Http\Requests\CreatePositionRequest;
 use App\Models\Position;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\View\View;
 
 class PositionController extends Controller
@@ -38,7 +37,7 @@ class PositionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PositionRequest $request)
+    public function store(CreatePositionRequest $request)
     {
         $validated = $request->validated();
 
@@ -46,7 +45,7 @@ class PositionController extends Controller
         $position->subordinary_level = $validated['subordinaryLevel'];
         $position->title = $validated['title'];
         $position->description = $validated['description'];
-        $position->parent_id = $validated['parentId'];
+        $position->parent_id = $validated['supremePositionIdSelect'];
         $position->admin_created_id = $request->user()->id;
 
         $position->save();
