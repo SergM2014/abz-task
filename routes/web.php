@@ -33,6 +33,8 @@ Route::prefix('admin')->group(function () {
     Route::post('/leader/change', [ EmployeeController::class, 'changeLeader'])->name('employees.leader.change');
     
     Route::get('/positions/delete', [PositionController::class, 'delete']);
+
+    Route::get('/positions/preprocess', [PositionController::class, 'preprocess']);
     
     Route::resource('positions', PositionController::class);
 });  

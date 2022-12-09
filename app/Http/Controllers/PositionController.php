@@ -13,33 +13,17 @@ use Illuminate\View\View;
 
 class PositionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         return view('admin.positions.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create(): View
     {
         $subordinaryLevels = Position::groupBy('subordinary_level')->pluck('subordinary_level');
         return view('admin.positions.create', ['subordinaryLevels' => $subordinaryLevels]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(CreatePositionRequest $request): RedirectResponse
     {
         $validated = $request->validated();
@@ -67,12 +51,6 @@ class PositionController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id): View
     {
         $subordinaryLevels = Position::groupBy('subordinary_level')->pluck('subordinary_level');
@@ -88,13 +66,6 @@ class PositionController extends Controller
             ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(UpdatePositionRequest $request, $id): RedirectResponse
     {
         $validated = $request->validated();
@@ -111,17 +82,10 @@ class PositionController extends Controller
         return redirect()->route('positions.index')->with('success','the position'.$id.' was updated!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)//: RedirectResponse
     {
         //$destroyed = Employee::destroy(request('id'));
         
-        //return redirect()->route('positions.index')->with('success','The position#'.request('id').' was deleted!');
         return response()->json([
             'message' => 'AThe Position#'.request('id').' is deleted', 
             'success' => true
@@ -143,11 +107,11 @@ class PositionController extends Controller
 
     public function getSubPositions():JsonResponse
     {    
-        $positionNumber = count(Position::where('parent_id', request('id'))->get());
+        //$positionNumber = count(Position::where('parent_id', request('id'))->first());
 
-        if($positionNumber > 0) {
+        if(Position::where('parent_id', request('id'))->first()) {
             return response()->json([
-                'message' => 'Attention! Position has '.$positionNumber.' subposition(s)', 
+                'message' => 'Attention! Position has  subposition(s)', 
                 'success' => false
             ]);
         }
@@ -159,11 +123,11 @@ class PositionController extends Controller
 
     public function getEmployees()
     {
-        $employeesNumber = count(Employee::where('position_id', request('id'))->get());
+        //$employeesNumber = count(Employee::where('position_id', request('id'))->first());
 
-        if($employeesNumber > 0) {
+        if(Employee::where('position_id', request('id'))->first()) {
             return response()->json([
-                'message' => 'Attention! Position has '.$employeesNumber.' employee(s)', 
+                'message' => 'Attention! Position has employee(s)', 
                 'success' => false
             ]);
         }
@@ -177,5 +141,10 @@ class PositionController extends Controller
     { 
         return redirect()->route('positions.index')
         ->with('success','The position#'.request('id').' was deleted!');  
+    }
+
+    public function preprocess(): View
+    {
+        return view('admin.positions.preprocess');
     }
 }
