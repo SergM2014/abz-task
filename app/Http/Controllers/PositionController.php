@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreatePositionRequest;
+use App\Http\Requests\UpdatePositionRequest;
 use App\Models\Position;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -90,7 +91,7 @@ class PositionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(PositionRequest $request, $id)
+    public function update(UpdatePositionRequest $request, $id)
     {
         $validated = $request->validated();
 
@@ -98,7 +99,7 @@ class PositionController extends Controller
         $position->subordinary_level = $validated['subordinaryLevel'];
         $position->title = $validated['title'];
         $position->description = $validated['description'];
-        $position->parent_id = $validated['parentId'];
+        $position->parent_id =  $validated['supremePositionIdSelect'];
         $position->admin_updated_id = $request->user()->id;
 
         $position->save();

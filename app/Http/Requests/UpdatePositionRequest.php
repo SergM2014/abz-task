@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PositionRequest extends FormRequest
+class UpdatePositionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,7 +27,7 @@ class PositionRequest extends FormRequest
             'subordinaryLevel' => 'required',
             'title' => 'required|min:3',
             'description' => 'required|min:3',
-            'parentId' => 'required'
+            'supremePositionIdSelect' => 'required' 
         ];
     }
 }
