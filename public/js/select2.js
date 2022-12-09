@@ -95,13 +95,9 @@ $(document).ready(function () {
 
 
   if($('#supremePositionId').length) {
-
     getSupremePositions();
-    // searchSupremePositions();
-    // if ($('#parentId').val()){
-    //  getSelectedSupremePosition();
-    // }
   }
+
   if(document.getElementById("subordinaryLevel")) {
     document.getElementById("subordinaryLevel").addEventListener('change', function (e) {
       if($('#supremePositionIdSelect')){
@@ -112,35 +108,7 @@ $(document).ready(function () {
     })
   }
 
-//might be useless
-  function getSelectedSupremePosition()
-  {
-    let selectedPosition = $('#parentIdSelect');
-     // Fetch the preselected item, and add to the control
-     let id = $('#parentId').val();
-     if (!id) id = 0;
-
-     fetch( '/api/position/supreme?parentId=' + id,
-             { method: 'GET',
-             credentials:'same-origin'
-         })
-         .then((response) => response.json())
-         .then(function (data) {
-
-             // create the option and append to Select2
-             let option = new Option(data.text, data.id,  true, true);
-
-             selectedPosition.append(option).trigger('change');
-
-             // manually trigger the `select2:select` event
-             selectedPosition.trigger({
-                 type: 'select2:select',
-                 params: {
-                     data: data
-                 }
-             });
-     });
-  }
+ 
   function getSupremePositions()
   {
     let supremePositionSelect = $('#supremePositionIdSelect');
@@ -160,34 +128,33 @@ $(document).ready(function () {
          .then((response) => response.json())
          .then(function (data) {
 
-          let selectedId = $('#supremePositionId').val();
+           let selectedId = $('#supremePositionId').val();
 
           let selected = false;
           if (selectedId) {  selected = Number(selectedId)}
 
-          let selectedOption =false;
+          let selectedOption = false;
           data.results.forEach(function(item) {
             if (typeof selected === 'number') {
 
               if(item.id == selected ) {
-             
-                selected = true;
-                selectedOption = new Option(item.text, item.id,  selected, true);
+                selectedOption = new Option(item.text, item.id,  true, true);
                 selected = false;
-                
+                return;
               }
             }
 
-            if (!selectedOption) { 
-              let option = new Option(item.text, item.id,  selected, true); 
+            let option = new Option(item.text, item.id,  selected, true); 
 
-               if(typeof selected != 'number') selected = false;
-
-               supremePositionSelect.append(option).trigger('change');
-            }
+              supremePositionSelect.append(option).trigger('change');
+              if(typeof selected != 'number') selected = false;
+          
           })
 
-          supremePositionSelect.append(selectedOption).trigger('change');
+          if( selectedOption ) {
+
+            supremePositionSelect.append(selectedOption).trigger('change');
+          }
           
 
              // manually trigger the `select2:select` event

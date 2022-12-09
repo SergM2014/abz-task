@@ -21,20 +21,20 @@
   <div class="form-group">
     <label for="title">Title</label>
     <input type="text" class="form-control <?= $errors->has('title')? 'is-invalid' : '' ?>" 
-    name="title" id="title" value="{{ old('title')?? $position->title }}" placeholder="title"
+    name="title" id="title" value="{{ Arr::has(old(), 'title')? old('title') : $position->title }}" placeholder="title"
    >
    <div class="invalid-feedback"><?= $errors->first('title') ?></div>
   </div>
   <div class="form-group">
     <label for="description">Description</label>
     <textarea class="form-control <?= $errors->has('description')? 'is-invalid' : '' ?>" 
-      id="description" name="description" rows="3">{{ old('description')?? $position->description }}</textarea>
+      id="description" name="description" rows="3">{{ Arr::has(old(), 'description')? old('description') : $position->description }}</textarea>
     <div class="invalid-feedback"><?= $errors->first('description') ?></div>
   </div>
   
   <div class="form-group">
     <label for="supremePositionIdSelect">Supreme position select</label>
-    <input type="hidden"  id="supremePositionId" value="{{ old('supremePositionId')?? $position->parent_id }}" >
+    <input type="hidden"  id="supremePositionId" value="{{ $supremePositionIdSelect }}" >
     <select name="supremePositionIdSelect" id="supremePositionIdSelect" class="form-control <?= $errors->has('supremePositionIdSelect')? 'is-invalid' : '' ?> select2" ></select>
     <div class="invalid-feedback"><?= $errors->first('supremePositionIdSelect') ?></div>
   </div>

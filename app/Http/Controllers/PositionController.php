@@ -76,11 +76,13 @@ class PositionController extends Controller
         $subordinaryLevels = Position::groupBy('subordinary_level')->pluck('subordinary_level');
         $position = Position::find($id);
         $subordinaryLevel = old('subordinaryLevel')?? $position->subordinary_level;
+        $supremePositionIdSelect = old('supremePositionIdSelect')?? $position->parent_id;
 
         return view('admin.positions.update', [
             'position' => $position,
             'subordinaryLevels' => $subordinaryLevels,
-            'subordinaryLevel' => $subordinaryLevel
+            'subordinaryLevel' => $subordinaryLevel,
+            'supremePositionIdSelect' => $supremePositionIdSelect 
             ]);
     }
 
@@ -104,7 +106,7 @@ class PositionController extends Controller
 
         $position->save();
 
-        return redirect()->route('positions.index')->with('success','A new position'.$id.' was updated!');
+        return redirect()->route('positions.index')->with('success','the position'.$id.' was updated!');
     }
 
     /**
