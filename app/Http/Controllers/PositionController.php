@@ -120,18 +120,6 @@ class PositionController extends Controller
         //
     }
 
-    public function getSupremePosition(Request $request): JsonResponse
-    {
-        if (!request('parentId')) {
-            return response()->json(['id' => 0, 'text' => 'it is the highest hierachical level! No suprem positions at all!']);
-        }
-
-        $position = Position::where('id', request('parentId'))
-                ->first(['id', 'title as text']);
-
-         return response()->json(['id' => $position->id, 'text' => $position->text]);
-    }
-
     public function getSupremePositions(Request $request): array
     {
         $supremeLevelId = ((integer)request('subordinaryLevel'))-1;
