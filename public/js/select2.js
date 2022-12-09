@@ -104,8 +104,10 @@ $(document).ready(function () {
   }
   if(document.getElementById("subordinaryLevel")) {
     document.getElementById("subordinaryLevel").addEventListener('change', function (e) {
-      if($('#supremePositionId')){
-        $('#supremePositionId').val(null).trigger('change');
+      if($('#supremePositionIdSelect')){
+        $('#supremePositionIdSelect').val(null).trigger('change');
+        $('#supremePositionIdSelect').empty();
+        getSupremePositions();
       }
     })
   }
@@ -178,15 +180,26 @@ $(document).ready(function () {
          .then((response) => response.json())
          .then(function (data) {
 
+          let selectedId = $('supremePositionId').val();
+
+          let selected = false;
+          if (selectedId) {  selected = selectedId}
+
           data.results.forEach(function(item) {
-            let option = new Option(item.text, item.id,  true, true);
+            if (typeof selected === 'number') {
+              if(item.id == selected ) {
+               
+                selected = true;
+              }
+            }
+
+            let option = new Option(item.text, item.id,  selected, true);
+
+            if(typeof selected != 'number') selected = false;
 
             supremePositionSelect.append(option).trigger('change');
           })
-             // create the option and append to Select2
-            //  let option = new Option(data.text, data.id,  true, true);
-
-            //  selectedPosition.append(option).trigger('change');
+          
 
              // manually trigger the `select2:select` event
              supremePositionSelect.trigger({
