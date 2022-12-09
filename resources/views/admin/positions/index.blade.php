@@ -3,7 +3,7 @@
 @section('content')
     <!-- Main content -->
     
-      <div  id="positionssCard" class="card">
+      <div  id="positionsCard" class="card">
         <div class="card-header">
           <h3 class="card-title">Positions</h3>
           <a href="{{ route('positions.create') }}" class="ml-5 link-success">Create a new Position</a>

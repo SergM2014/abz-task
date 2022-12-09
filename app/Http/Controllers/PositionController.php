@@ -6,6 +6,7 @@ use App\Http\Requests\CreatePositionRequest;
 use App\Http\Requests\UpdatePositionRequest;
 use App\Models\Position;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -38,7 +39,7 @@ class PositionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CreatePositionRequest $request)
+    public function store(CreatePositionRequest $request): RedirectResponse
     {
         $validated = $request->validated();
 
@@ -93,7 +94,7 @@ class PositionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatePositionRequest $request, $id)
+    public function update(UpdatePositionRequest $request, $id): RedirectResponse
     {
         $validated = $request->validated();
 
@@ -131,5 +132,23 @@ class PositionController extends Controller
                 ->get(['id', 'title as text']);
 
          return ['results' => $positions];
+    }
+
+    public function getSubPositions()
+    {
+        $subPositions = Position::where('parent_id', request('id'))->get();
+    
+        $positionNumber = count($subPositions);
+
+        if($positionNumber > 0) {
+            return response()->json([
+                'message' => 'Attention! Position has '.$positionNumber.' subposition(s)', 
+                'success' => false
+            ]);
+        }
+        return response()->json([
+            'message' => 'Are You shure to delete the Position#'.request('id').'?', 
+            'success' => true
+        ]);
     }
 }

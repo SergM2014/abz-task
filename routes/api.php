@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\PositionController;
+use App\Models\Position;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,3 +39,5 @@ Route::get('position/supreme', [PositionController::class, 'getSupremePosition']
     ->name('api.positions.supreme');
 Route::post('position/supremes', [PositionController::class, 'getSupremePositions'])
     ->name('api.positions.supremes');
+Route::get('position/subpositions', [PositionController::class, 'getSubPositions'])
+    ->name('api.positions.subpositions');
