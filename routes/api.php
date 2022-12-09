@@ -38,3 +38,5 @@ Route::get('position/search', [PositionController::class, 'search'])
     ->name('api.positions.search');
 Route::get('position/supreme', [PositionController::class, 'getSupremePosition'])
     ->name('api.positions.supreme');
+Route::post('position/supremes', [PositionController::class, 'getSupremePositions'])
+    ->name('api.positions.supremes');
