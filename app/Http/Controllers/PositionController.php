@@ -117,28 +117,6 @@ class PositionController extends Controller
         //
     }
 
-    public function search(Request $request)
-    {
-        $supremeLevelId = request('subordinaryLevel')-1;
-
-        if (!$supremeLevelId) {
-            return [
-                'results' =>[
-                    [
-                        'id'=> '0',
-                        'text'=> 'This is the heighest subordinary level. It doesnot contain position!'
-                    ]
-                ]
-            ];
-        }
-
-        $employees = Position::where('title', 'LIKE', '%'.$request->input('term', '').'%')
-                    ->where('subordinary_level', $supremeLevelId)
-                    ->get(['id', 'title as text']);
-
-        return ['results' => $employees];
-    }
-
     public function getSupremePosition(Request $request): JsonResponse
     {
         if (!request('parentId')) {

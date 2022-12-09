@@ -34,8 +34,6 @@ Route::get('employee/subordinates', [EmployeeController::class, 'getSubordinates
 Route::post('image/store', [ImageController::class, 'store'])->name('image.store');
 Route::post('image/rotate', [ImageController::class, 'rotate'])->name('image.rotate');
 
-Route::get('position/search', [PositionController::class, 'search'])
-    ->name('api.positions.search');
 Route::get('position/supreme', [PositionController::class, 'getSupremePosition'])
     ->name('api.positions.supreme');
 Route::post('position/supremes', [PositionController::class, 'getSupremePositions'])
