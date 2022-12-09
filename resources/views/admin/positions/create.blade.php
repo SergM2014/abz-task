@@ -35,10 +35,10 @@
   </div>
   
   <div class="form-group">
-    <label for="supremeLevelId">Supreme position select</label>
-    <input type="hidden"  id="supremeLevelId" value="{{ old('supremeLevelId') }}" >
-    <select name="supremeLevelId" id="supremeLevelId" class="form-control <?= $errors->has('supremeLevelId')? 'is-invalid' : '' ?> select2" ></select>
-    <div class="invalid-feedback"><?= $errors->first('supremeLevelId') ?></div>
+    <label for="supremePositionId">Supreme position select</label>
+    <input type="hidden"  id="supremePositionId" value="{{ old('supremePositionId') }}" >
+    <select name="supremePositionId" id="supremePositionId" class="form-control <?= $errors->has('supremePositionId')? 'is-invalid' : '' ?> select2" ></select>
+    <div class="invalid-feedback"><?= $errors->first('supremePositionId') ?></div>
   </div>
  
   <div class="text-center">
