@@ -94,17 +94,18 @@ $(document).ready(function () {
   }
 
 
-  if($('#parentIdSelect').length) {
+  if($('#supremePositionId').length) {
 
-    searchSupremePositions();
-    if ($('#parentId').val()){
-     getSelectedSupremePosition();
-    }
+    getSupremePositions();
+    // searchSupremePositions();
+    // if ($('#parentId').val()){
+    //  getSelectedSupremePosition();
+    // }
   }
   if(document.getElementById("subordinaryLevel")) {
     document.getElementById("subordinaryLevel").addEventListener('change', function (e) {
-      if($('#parentIdSelect')){
-        $('#parentIdSelect').val(null).trigger('change');
+      if($('#supremePositionId')){
+        $('#supremePositionId').val(null).trigger('change');
       }
     })
   }
@@ -156,5 +157,44 @@ $(document).ready(function () {
                      data: data
                  }
              });
+     });
+  }
+  function getSupremePositions()
+  {
+    let supremePositionSelect = $('#supremePositionIdSelect');
+     // Fetch the preselected item, and add to the control
+    
+    let subordinaryLevel = $('#subordinaryLevel').val();
+    if(!subordinaryLevel) subordinary = 1;
+     let fd = new FormData;
+     fd.append('subordinaryLevel', subordinaryLevel );
+
+     fetch( '/api/position/supremes',
+             { 
+              method: 'post',
+              body: fd,
+              credentials:'same-origin'
+              })
+         .then((response) => response.json())
+         .then(function (data) {
+
+          data.results.forEach(function(item) {
+            let option = new Option(item.text, item.id,  true, true);
+
+            supremePositionSelect.append(option).trigger('change');
+          })
+             // create the option and append to Select2
+            //  let option = new Option(data.text, data.id,  true, true);
+
+            //  selectedPosition.append(option).trigger('change');
+
+             // manually trigger the `select2:select` event
+             supremePositionSelect.trigger({
+                 type: 'select2:select',
+                 params: {
+                     data: data
+                 }
+             });
+             //supremePositionSelect.select2('open');
      });
   }

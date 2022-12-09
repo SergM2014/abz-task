@@ -28,7 +28,7 @@ class CreatePositionRequest extends FormRequest
                 'subordinaryLevel' => 'required',
                 'title' => 'required|min:3',
                 'description' => 'required|min:3',
-                'supremePositionId' => 'required' 
+                'supremePositionIdSelect' => 'required' 
         ];
     }
 }

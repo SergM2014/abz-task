@@ -152,5 +152,16 @@ class PositionController extends Controller
          return response()->json(['id' => $position->id, 'text' => $position->text]);
     }
 
-    
+    public function getSupremePositions(Request $request): array
+    {
+        $supremeLevelId = ((integer)request('subordinaryLevel'))-1;
+        if (!$supremeLevelId) {
+            return ['results'=> [['id' => 0, 'text' => 'it is the highest hierachical level! No suprem positions at all!']]];
+        }
+
+        $positions = Position::where('subordinary_level', $supremeLevelId )
+                ->get(['id', 'title as text']);
+
+         return ['results' => $positions];
+    }
 }
