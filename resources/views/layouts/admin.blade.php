@@ -10,9 +10,9 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome Icons -->
   <!-- overlayScrollbars -->
-  <link rel="stylesheet" href="/admin/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <link rel="stylesheet" href="/adm/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="/admin/dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="/adm/dist/css/adminlte.min.css">
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" >
 
@@ -27,7 +27,7 @@
 
   <!-- Preloader -->
   <div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__wobble" src="/admin/dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
+    <img class="animation__wobble" src="/adm/dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
   </div>
 
   <!-- Navbar -->
@@ -71,7 +71,7 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="#" class="brand-link">
-      <img src="/admin/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <img src="/adm/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">AdminLTE 3</span>
     </a>
 
@@ -153,35 +153,30 @@
   </footer>
 </div>
 
-<!-- ./wrapper -->
-<!-- <script src="/index.js"></script> -->
 <!-- REQUIRED SCRIPTS -->
 <!-- jQuery -->
-<script src="/admin/plugins/jquery/jquery.min.js"></script>
-
-<!-- Datatable-->
-<!-- <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script> -->
+<script src="/adm/plugins/jquery/jquery.min.js"></script>
 
 <!-- Bootstrap -->
-<script src="/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/adm/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- overlayScrollbars -->
-<script src="/admin/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<script src="/adm/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 <!-- AdminLTE App -->
-<script src="/admin/dist/js/adminlte.js"></script>
+<script src="/adm/dist/js/adminlte.js"></script>
 
 <!-- PAGE PLUGINS -->
 <!-- jQuery Mapael -->
-<script src="/admin/plugins/jquery-mousewheel/jquery.mousewheel.js"></script>
-<script src="/admin/plugins/raphael/raphael.min.js"></script>
-<script src="/admin/plugins/jquery-mapael/jquery.mapael.min.js"></script>
-<script src="/admin/plugins/jquery-mapael/maps/usa_states.min.js"></script>
+<script src="/adm/plugins/jquery-mousewheel/jquery.mousewheel.js"></script>
+<script src="/adm/plugins/raphael/raphael.min.js"></script>
+<script src="/adm/plugins/jquery-mapael/jquery.mapael.min.js"></script>
+<script src="/adm/plugins/jquery-mapael/maps/usa_states.min.js"></script>
 <!-- ChartJS -->
-<script src="/admin/plugins/chart.js/Chart.min.js"></script>
+<script src="/adm/plugins/chart.js/Chart.min.js"></script>
 
 <!-- AdminLTE for demo purposes -->
 <!-- <script src="dist/js/demo.js"></script> -->
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="/admin/dist/js/pages/dashboard2.js"></script>
+<script src="/adm/dist/js/pages/dashboard2.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
