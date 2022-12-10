@@ -30,7 +30,7 @@
         <div class="invalid-feedback"><?= $errors->first('siblingsPosition') ?></div>
 
         <div class="text-center mb-3">
-            <button type="submit" class="btn btn-primary mb-2 mt-4">{{ $submitBtnTitle }}</button> 
+            <button type="submit" class="btn btn-primary mb-2 mt-4" onClick="this.form.submit(); this.disabled=true; this.value='Sending…'; " >{{ $submitBtnTitle }}</button> 
         </div>
     </form>
 
