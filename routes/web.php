@@ -40,5 +40,7 @@ Route::prefix('admin')->group(function () {
   
     Route::post('/positions/siblings/change', [PositionController::class, 'changeSiblings'])->name('positions.siblings.change');
 
+    Route::post('/positions/rearange', [PositionController::class, 'rearange'])->name('positions.rearange');
+
     Route::resource('positions', PositionController::class);
 });  
