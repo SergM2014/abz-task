@@ -11,21 +11,21 @@
     <label for="firstName">First Name</label>
     <input type="text" class="form-control <?= $errors->has('firstName')? 'is-invalid' : '' ?>" 
     name="firstName" id="firstName" value="{{ old('firstName')?? $employee->first_name }}" placeholder="First Name"
-   >
+    minlength="2" maxlength="256" required >
    <div class="invalid-feedback"><?= $errors->first('firstName') ?></div>
   </div>
   <div class="form-group">
     <label for="middleName">Middle Name</label>
     <input type="text" class="form-control <?= $errors->has('middleName')? 'is-invalid' : '' ?>" 
     name="middleName" id="middleName" value="{{ old('middleName')?? $employee->middle_name }}" placeholder="Middle Name" 
-   >
+    minlength="2" maxlength="256" required >
    <div class="invalid-feedback"><?= $errors->first('middleName') ?></div>
   </div>
   <div class="form-group">
     <label for="lastName">Last Name</label>
     <input type="text" class="form-control <?= $errors->has('lastName')? 'is-invalid' : '' ?>" 
     name="lastName" id="lastName" value="{{ old('lastName')?? $employee->last_name }}" placeholder="Last Name"
-    >
+    minlength="2" maxlength="256" required >
     <div class="invalid-feedback"><?= $errors->first('lastName') ?></div>
   </div>
   
@@ -53,7 +53,7 @@
     <label for="employmentDate">Employment Date</label>
         <input type="date" class="form-control <?= $errors->has('employmentDate')? 'is-invalid' : '' ?>" 
          name="employmentDate" id="employmentDate" value="{{ old('employmentDate')?? $employee->employment_date }}" placeholder="employmentDate"
-     >
+         required pattern="\d{2}.\d{2}.\d{4}" >
      <div class="invalid-feedback"><?= $errors->first('employmentDate') ?></div>
   </div>
   <div class="form-group">
@@ -63,24 +63,24 @@
     </div>
     <input type="tel" class="form-control <?= $errors->has('phone')? 'is-invalid' : '' ?>" 
     name="phone" id="phone" value="{{ old('phone')?? $employee->phone }}" placeholder="Phone"
-     >
+    pattern="([\+]\d{2}[\(]\d{3}[\)]\d{7})|([\+]\d{2}[\(]\d{4}[\)]\d{6})|([\+]\d{2}[\(]\d{5}[\)]\d{5})|\d{10}|\d{7}" required >
      <div class="invalid-feedback"><?= $errors->first('phone') ?></div>
   </div>
   <div class="form-group">
     <label for="email">Email</label>
     <input type="text" class="form-control <?= $errors->has('email')? 'is-invalid' : '' ?>"
      name="email" id="email" value="{{ old('email')?? $employee->email }}" placeholder="email"
-       >
-       <div class="invalid-feedback"><?= $errors->first('email') ?></div>
+     required  >
+    <div class="invalid-feedback"><?= $errors->first('email') ?></div>
   </div>
   <div class="form-group">
     <label for="salary">Salary</label>
     <div class="text-red">
-    <smal>if sum is decimal, use  delimeter -comma, after comma 3 numbers are allowed. the max sum is 500,000 </smal>
+    <small>if sum is decimal, use  delimeter -comma, after comma 3 numbers are allowed. the max sum is 500,000 </small>
     </div>
     <input type="number" class="form-control <?= $errors->has('salary')? 'is-invalid' : '' ?>"
      name="salary" id="salary" value="{{ old('salary')?? $employee->salary }}" placeholder="Salary" 
-     step="0.001">
+     step="0.001" min="0" max="500">
      <div class="invalid-feedback"><?= $errors->first('salary') ?></div>
   </div>
   
