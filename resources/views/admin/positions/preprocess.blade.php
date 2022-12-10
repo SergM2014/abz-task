@@ -43,7 +43,7 @@
     <h3>The current Position contains {{ $subPositionsNumber }} subposition(s)</h3>
     <p>Before deletion of the position you should resubordinate them</p>
     
-    <form method="POST" action="{{ route('positions.siblings.change') }}>
+    <form method="POST" action="{{ route('positions.siblings.change') }}">
         @CSRF
         <input type="hidden" name="id" value="{{ $position->id }}" />
         <label for="siblingsPosition">Change for another siblings position</label>

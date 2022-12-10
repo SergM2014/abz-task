@@ -178,6 +178,21 @@ class PositionController extends Controller
         //Position::destroy(request('id'));
         return redirect()->route('positions.index')
         ->with('success','The Position#'.request('id').' was deleted! All it employees were were resubordinated to Position#'.request('siblingsPosition')); 
-       
+    }
+
+    public function changeSiblings(ChangePositionRequest $request)
+    {
+        $validated = $request->validated();
+
+        //find subposition
+        $subPositions = Position::where('parent_id', request('id'))->get();
+        foreach($subPositions as $position) {
+            $position->parent_id = request('siblingsPosition');
+            $position->update();
+        }
+
+        //Position::destroy(request('id'));
+        return redirect()->route('positions.index')
+        ->with('success','The Position#'.request('id').' was deleted! All it subposition were were resubordinated to Position#'.request('siblingsPosition')); 
     }
 }
