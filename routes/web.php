@@ -35,6 +35,8 @@ Route::prefix('admin')->group(function () {
     Route::get('/positions/delete', [PositionController::class, 'delete']);
 
     Route::get('/positions/preprocess', [PositionController::class, 'preprocess']);
+
+    Route::post('/positions/employees/resubordinate', [PositionController::class, 'resubordinateEmployees'])->name('positions.employees.resubordinate');
     
     Route::resource('positions', PositionController::class);
 });  

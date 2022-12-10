@@ -15,7 +15,7 @@
 <h3>The current Position contains {{ $employeesNumber }} employee(s)</h3>
 <p>Before deletion of the position you should resubordinate them</p>
 
-<form method="POST" >
+<form method="POST" action="{{ route('positions.employees.resubordinate') }}" >
     @CSRF
     <div class="form-group">
     <label for="siblingsPosition">Choose another position</label>
@@ -28,6 +28,7 @@
         value= "{{ $position->id }}" >{{ $position->title }}</option>
         @endforeach
     </select>
+    <div class="invalid-feedback"><?= $errors->first('siblingsPosition') ?></div>
 
     <div class="text-center mb-3">
         <button type="submit" class="btn btn-primary mb-2 mt-4">Resubordinate employees and delete current position</button> 
