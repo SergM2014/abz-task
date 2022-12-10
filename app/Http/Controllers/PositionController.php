@@ -11,6 +11,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\DB;
 
 class PositionController extends Controller
 {
@@ -39,17 +40,6 @@ class PositionController extends Controller
         $position->save();
 
         return redirect()->route('positions.index')->with('success','A new position is created!');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     public function edit($id): View
@@ -186,13 +176,8 @@ class PositionController extends Controller
     public function resubordinateEmployees(ChangePositionRequest $request)
     {
         $validated = $request->validated();
-
-        $employees = Employee::where('position_id', request('id'))->get();
-        //must change to map
-        foreach($employees as $employee) {
-            $employee->position_id = request('siblingsPosition');
-            $employee->update();
-        }
+       
+        DB::table('employees')->where('position_id', request('id'))->update(['position_id' => request('siblingsPosition')]);
 
         //Position::destroy(request('id'));
         return redirect()->route('positions.index')
@@ -203,12 +188,7 @@ class PositionController extends Controller
     {
         $validated = $request->validated();
 
-        //find subposition
-        $subPositions = Position::where('parent_id', request('id'))->get();
-        foreach($subPositions as $position) {
-            $position->parent_id = request('siblingsPosition');
-            $position->update();
-        }
+        DB::table('positions')->where('parent_id', request('id'))->update(['parent_id' => request('siblingsPosition')]);
 
         //Position::destroy(request('id'));
         return redirect()->route('positions.index')
@@ -219,21 +199,12 @@ class PositionController extends Controller
     {
         $validated = $request->validated();
 
-        $employees = Employee::where('position_id', request('id'))->get();
-        //must change to map
-        foreach($employees as $employee) {
-            $employee->position_id = request('siblingsPosition');
-            $employee->update();
-        }
+        DB::table('employees')->where('position_id', request('id'))->update(['position_id' => request('siblingsPosition')]);
 
-        $subPositions = Position::where('parent_id', request('id'))->get();
-        foreach($subPositions as $position) {
-            $position->parent_id = request('siblingsPosition');
-            $position->update();
-        }
+        DB::table('positions')->where('parent_id', request('id'))->update(['parent_id' => request('siblingsPosition')]);
 
         //Position::destroy(request('id'));
-        
+
         return redirect()->route('positions.index')
         ->with('success','The Position#'.request('id').' was deleted! All it subposition(s) and employee(s) were were resubordinated to Position#'.request('siblingsPosition')); 
     }
