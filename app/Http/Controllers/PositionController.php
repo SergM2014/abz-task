@@ -145,6 +145,10 @@ class PositionController extends Controller
 
     public function preprocess(): View
     {
-        return view('admin.positions.preprocess');
+        $position = Position::find(request('id'));
+        $employeesNumber = count(Employee::where('position_id', request('id'))->get()); 
+        $siblingsPositions = Position::where('subordinary_level', $position->subordinary_level)
+                            ->whereNot('id', $position->id)->get();
+        return view('admin.positions.preprocess', ['position' => $position, 'employeesNumber' => $employeesNumber, 'siblingsPositions' => $siblingsPositions] );
     }
 }
