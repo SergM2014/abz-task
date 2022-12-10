@@ -3,7 +3,7 @@ $(document).ready(function () {
     if( $('#leaderIdSelect').length){
 
       searchEmployee();
-      if (('#leaderId').val()) {
+      if ($('#leaderId').val()) {
         getSelectedLeader();
       }
     }

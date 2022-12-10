@@ -91,6 +91,14 @@ class EmployeeController extends Controller
     {
         $superiorId = $this->getSuperiorsPositionId(request('positionId'));
 
+        if (!$superiorId) {
+            return [
+                'results' => [
+                               [ 'id' => 0, 'text' => 'This is superior Position, no leader possible!' ]
+                             ]
+                    ];
+        }
+
         $employees = Employee::where('last_name', 'LIKE', '%'.$request->input('term', '').'%')
                     ->where('position_id', $superiorId)
                     ->get(['id', DB::raw("CONCAT(first_name, ' ', middle_name ,' ', last_name) as text")]);
