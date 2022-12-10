@@ -110,7 +110,7 @@ class PositionController extends Controller
         ]);
     }
 
-    public function getEmployees()
+    public function getEmployees(): JsonResponse
     {
         if(Employee::where('position_id', request('id'))->first()) {
             return response()->json([
@@ -173,7 +173,7 @@ class PositionController extends Controller
              ] );
     }
 
-    public function resubordinateEmployees(ChangePositionRequest $request)
+    public function resubordinateEmployees(ChangePositionRequest $request): RedirectResponse
     {
         $validated = $request->validated();
        
@@ -184,7 +184,7 @@ class PositionController extends Controller
         ->with('success','The Position#'.request('id').' was deleted! All it employees were were resubordinated to Position#'.request('siblingsPosition')); 
     }
 
-    public function changeSiblings(ChangePositionRequest $request)
+    public function changeSiblings(ChangePositionRequest $request): RedirectResponse
     {
         $validated = $request->validated();
 
@@ -195,7 +195,7 @@ class PositionController extends Controller
         ->with('success','The Position#'.request('id').' was deleted! All it subposition were were resubordinated to Position#'.request('siblingsPosition')); 
     }
 
-    public function rearange(ChangePositionRequest $request)
+    public function rearange(ChangePositionRequest $request): RedirectResponse
     {
         $validated = $request->validated();
 
