@@ -11,7 +11,6 @@ use App\Models\Position;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 
@@ -25,10 +24,8 @@ class EmployeeController extends Controller
     public function create(): View
     {
         $positions = Position::all('id', 'title');
-        //the under line must be corrected later to view composer
-        $photo = \old('photo')?? 'no-avatar.png';
        
-        return view('admin.employees.create', ['positions' => $positions, 'photo' => $photo]);
+        return view('admin.employees.create', ['positions' => $positions]);
     }
 
     public function store(StoreEmployeeRequest $request): RedirectResponse
@@ -36,9 +33,9 @@ class EmployeeController extends Controller
         $validated = $request->validated();
 
         $employee = new Employee();
-        $employee-> first_name = $validated['firstName'];
-        $employee-> middle_name = $validated['middleName'];
-        $employee-> last_name = $validated['lastName'];
+        $employee->first_name = $validated['firstName'];
+        $employee->middle_name = $validated['middleName'];
+        $employee->last_name = $validated['lastName'];
         $employee->position_id = $validated['positionId'];
         $employee->leader_id = $validated['leaderId'];
         $employee->employment_date = $validated['employmentDate'];
@@ -56,12 +53,10 @@ class EmployeeController extends Controller
     {
         $employee = Employee::findOrFail($id);
         $positions = Position::all('id', 'title');
-        $photo =  \old('photo')?? $employee->photo ?? 'no-avatar.png';
         $positionId = \old('positionId')?? $employee->position_id;
         return view('admin.employees.edit', [
             'employee' => $employee, 
             'positions' => $positions, 
-            'photo' => $photo,
             'positionId' => $positionId
         ]);
     }
