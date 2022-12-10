@@ -34,9 +34,19 @@ $(document).ready(function () {
                 }
                 // Query parameters will be ?term=[term]&positionId=[positionId]
                 return query;
-              }
+              },
+              success(data){
+
+              data.results.forEach( function(item){
+                  if (item.id == 0) {
+                    selectedOption = new Option(item.text, item.id,  true, true);
+                    $('#leaderIdSelect').append(selectedOption).trigger('change');
+                  }
+              });         
+            
+            }
         },
-        
+
     });
   }
 
