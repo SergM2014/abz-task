@@ -23,6 +23,7 @@ class PositionController extends Controller
     public function create(): View
     {
         $subordinaryLevels = Position::groupBy('subordinary_level')->pluck('subordinary_level');
+
         return view('admin.positions.create', ['subordinaryLevels' => $subordinaryLevels]);
     }
 
@@ -75,7 +76,7 @@ class PositionController extends Controller
 
     public function destroy($id): JsonResponse
     {
-        //$destroyed = Position::destroy(request('id'));
+        //Position::destroy(request('id'));
         
         return response()->json([
             'message' => 'The Position#'.request('id').' is deleted', 
@@ -90,15 +91,14 @@ class PositionController extends Controller
             return ['results'=> [['id' => 0, 'text' => 'it is the highest hierachical level! No suprem positions at all!']]];
         }
 
-        $positions = Position::where('subordinary_level', $supremeLevelId )
-                ->get(['id', 'title as text']);
+        $positions = Position::where('subordinary_level', $supremeLevelId )->get(['id', 'title as text']);
 
          return ['results' => $positions];
     }
 
     public function getSubPositions():JsonResponse
     {    
-        if(Position::where('parent_id', request('id'))->first()) {
+        if (Position::where('parent_id', request('id'))->first()) {
             return response()->json([
                 'message' => 'Attention! Position has  subposition(s)', 
                 'success' => false
@@ -133,9 +133,11 @@ class PositionController extends Controller
     public function preprocess(): View
     {
         $position = Position::find(request('id'));
-        $employeesNumber = count(Employee::where('position_id', request('id'))->get()); 
+
+        $employeesNumber = count(DB::table('employees')->where('position_id', request('id'))->get());
+
         $siblingsPositions = Position::where('subordinary_level', $position->subordinary_level)
-                            ->whereNot('id', $position->id)->get();
+                            ->whereNot('id', request('id'))->get();
 
         $subOrdinaryLevel = ($position->subordinary_level)+1;
 
@@ -143,6 +145,58 @@ class PositionController extends Controller
                             ->where('parent_id', request('id'))
                             ->get());    
                             
+        extract($this->getVariablesForView($employeesNumber, $subPositionsNumber));
+
+        return view('admin.positions.preprocess', [
+            'route' => $route,
+            'submitBtnTitle' => $submitBtnTitle,
+            'selectTitle' => $selectTitle,
+            'disclaimer' => $disclaimer,
+            'position' => $position, 
+            'siblingsPositions' => $siblingsPositions,
+             ] );
+    }
+
+    public function resubordinateEmployees(ChangePositionRequest $request): RedirectResponse
+    {
+        $validated = $request->validated();
+       
+        DB::table('employees')->where('position_id', request('id'))->update(['position_id' => request('siblingsPosition')]);
+
+        //Position::destroy(request('id'));
+
+        return redirect()->route('positions.index')
+        ->with('success','The Position#'.request('id').' was deleted! All it employees were were resubordinated to Position#'.request('siblingsPosition')); 
+    }
+
+    public function changeSiblings(ChangePositionRequest $request): RedirectResponse
+    {
+        $validated = $request->validated();
+
+        DB::table('positions')->where('parent_id', request('id'))->update(['parent_id' => request('siblingsPosition')]);
+
+        //Position::destroy(request('id'));
+
+        return redirect()->route('positions.index')
+        ->with('success','The Position#'.request('id').' was deleted! All it subposition were were resubordinated to Position#'.request('siblingsPosition')); 
+    }
+
+    public function rearange(ChangePositionRequest $request): RedirectResponse
+    {
+        $validated = $request->validated();
+
+        DB::table('employees')->where('position_id', request('id'))->update(['position_id' => request('siblingsPosition')]);
+
+        DB::table('positions')->where('parent_id', request('id'))->update(['parent_id' => request('siblingsPosition')]);
+
+        //Position::destroy(request('id'));
+
+        return redirect()->route('positions.index')
+        ->with('success','The Position#'.request('id').' was deleted! All it subposition(s) and employee(s) were were resubordinated to Position#'.request('siblingsPosition')); 
+    }
+
+    private function getVariablesForView($employeesNumber, $subPositionsNumber): array
+    {
         if(request('employees')) {
             $route = route('positions.employees.resubordinate');
             $disclaimer = "The current Position contains  $employeesNumber  employee(s).";
@@ -162,50 +216,6 @@ class PositionController extends Controller
             $selectTitle = "Change for another siblings position to resubordinate subposition(s) and employee(s)";  
         }
 
-        return view('admin.positions.preprocess', [
-            'route' => $route,
-            'submitBtnTitle' => $submitBtnTitle,
-            'selectTitle' => $selectTitle,
-            'disclaimer' => $disclaimer,
-            'position' => $position, 
-
-            'siblingsPositions' => $siblingsPositions,
-             ] );
-    }
-
-    public function resubordinateEmployees(ChangePositionRequest $request): RedirectResponse
-    {
-        $validated = $request->validated();
-       
-        DB::table('employees')->where('position_id', request('id'))->update(['position_id' => request('siblingsPosition')]);
-
-        //Position::destroy(request('id'));
-        return redirect()->route('positions.index')
-        ->with('success','The Position#'.request('id').' was deleted! All it employees were were resubordinated to Position#'.request('siblingsPosition')); 
-    }
-
-    public function changeSiblings(ChangePositionRequest $request): RedirectResponse
-    {
-        $validated = $request->validated();
-
-        DB::table('positions')->where('parent_id', request('id'))->update(['parent_id' => request('siblingsPosition')]);
-
-        //Position::destroy(request('id'));
-        return redirect()->route('positions.index')
-        ->with('success','The Position#'.request('id').' was deleted! All it subposition were were resubordinated to Position#'.request('siblingsPosition')); 
-    }
-
-    public function rearange(ChangePositionRequest $request): RedirectResponse
-    {
-        $validated = $request->validated();
-
-        DB::table('employees')->where('position_id', request('id'))->update(['position_id' => request('siblingsPosition')]);
-
-        DB::table('positions')->where('parent_id', request('id'))->update(['parent_id' => request('siblingsPosition')]);
-
-        //Position::destroy(request('id'));
-
-        return redirect()->route('positions.index')
-        ->with('success','The Position#'.request('id').' was deleted! All it subposition(s) and employee(s) were were resubordinated to Position#'.request('siblingsPosition')); 
+        return compact('route', 'disclaimer', 'submitBtnTitle', 'selectTitle');
     }
 }
