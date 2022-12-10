@@ -2,13 +2,6 @@
 
 @section('content')
 
-
-
-{{ $route}}
-{{ $submitBtnTitle }}
-{{ $selectTitle }}
-{{ $disclaimer }}
-
 <div class="text-center mb-3">
     <a href="{{ route('positions.index')}}" class="btn btn-danger">Revert deleting & go back</a>
 </div>
