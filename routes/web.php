@@ -23,7 +23,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::prefix('admin')->group(function () {
+
+Route::middleware(['auth'])->prefix('admin')->group(function () {
+    
     Route::resource('employees', EmployeeController::class);
 
     Route::get('/employee/delete', [ EmployeeController::class, 'delete'] )->name('employees.delete');
@@ -43,4 +45,4 @@ Route::prefix('admin')->group(function () {
     Route::post('/positions/rearange', [PositionController::class, 'rearange'])->name('positions.rearange');
 
     Route::resource('positions', PositionController::class);
-})->middleware('auth');  
+});  
