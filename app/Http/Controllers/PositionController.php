@@ -122,8 +122,6 @@ class PositionController extends Controller
 
     public function getEmployees()
     {
-        //$employeesNumber = count(Employee::where('position_id', request('id'))->first());
-
         if(Employee::where('position_id', request('id'))->first()) {
             return response()->json([
                 'message' => 'Attention! Position has employee(s)', 
@@ -215,5 +213,28 @@ class PositionController extends Controller
         //Position::destroy(request('id'));
         return redirect()->route('positions.index')
         ->with('success','The Position#'.request('id').' was deleted! All it subposition were were resubordinated to Position#'.request('siblingsPosition')); 
+    }
+
+    public function rearange(ChangePositionRequest $request)
+    {
+        $validated = $request->validated();
+
+        $employees = Employee::where('position_id', request('id'))->get();
+        //must change to map
+        foreach($employees as $employee) {
+            $employee->position_id = request('siblingsPosition');
+            $employee->update();
+        }
+
+        $subPositions = Position::where('parent_id', request('id'))->get();
+        foreach($subPositions as $position) {
+            $position->parent_id = request('siblingsPosition');
+            $position->update();
+        }
+
+        //Position::destroy(request('id'));
+        
+        return redirect()->route('positions.index')
+        ->with('success','The Position#'.request('id').' was deleted! All it subposition(s) and employee(s) were were resubordinated to Position#'.request('siblingsPosition')); 
     }
 }
