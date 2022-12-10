@@ -45,8 +45,12 @@
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
        <li class="nav-item d-none d-sm-inline-block">
-        <a href="/logout" class="nav-link">LogOut</a>
+        <form id="logout-form" action="{{ url('logout') }}" method="POST">
+          {{ csrf_field() }}
+          <button type="submit">Logout</button>
+        </form>
       </li>
+      
      
       
       <li class="nav-item">
@@ -75,9 +79,7 @@
     <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-          <img src="/admin/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-        </div>
+        
         <div class="info">
           <a href="#" class="d-block">{{ Auth::user()->name }}</a>
         </div>
