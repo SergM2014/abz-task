@@ -17,6 +17,7 @@
 
 <form method="POST" action="{{ route('positions.employees.resubordinate') }}" >
     @CSRF
+    <input type="hidden" name="id" value="{{ $position->id }}" />
     <div class="form-group">
     <label for="siblingsPosition">Choose another position</label>
     <select class="form-control <?= $errors->has('siblingsPosition')? 'is-invalid' : '' ?>"

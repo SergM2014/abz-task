@@ -81,7 +81,7 @@ if (document.getElementById('positionsCard')) {
                                 }
                         } else {
                             if (window.confirm('Are You shure to delete the position? Curent Position has employees!')) {
-                                //перехід на форму де міняємо сабпозиції і працівників
+                                //перехід на форму де міняємо підпорядкування працівників+++
                                 window.location.href = '/admin/positions/preprocess?employees=true&id='+id;
                         
                             }
@@ -99,7 +99,7 @@ if (document.getElementById('positionsCard')) {
                     .then(function(employees) {
                         if(employees.success) {
                             if (window.confirm('Are You shure to delete the position? Curent Position has suordinary position!')) {
-                                    //перехід на форму де міняємо сабпозиції
+                                    //перехід на форму де міняємо сабпозиції 
                                     window.location.href = '/admin/positions/preprocess?subpositions=true&id='+id;
                             
                                 }

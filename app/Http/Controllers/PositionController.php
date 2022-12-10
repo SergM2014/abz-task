@@ -83,12 +83,12 @@ class PositionController extends Controller
         return redirect()->route('positions.index')->with('success','the position'.$id.' was updated!');
     }
 
-    public function destroy($id)//: RedirectResponse
+    public function destroy($id): JsonResponse
     {
-        //$destroyed = Employee::destroy(request('id'));
+        //$destroyed = Position::destroy(request('id'));
         
         return response()->json([
-            'message' => 'AThe Position#'.request('id').' is deleted', 
+            'message' => 'The Position#'.request('id').' is deleted', 
             'success' => true
         ]);
     }
@@ -108,8 +108,6 @@ class PositionController extends Controller
 
     public function getSubPositions():JsonResponse
     {    
-        //$positionNumber = count(Position::where('parent_id', request('id'))->first());
-
         if(Position::where('parent_id', request('id'))->first()) {
             return response()->json([
                 'message' => 'Attention! Position has  subposition(s)', 
@@ -156,6 +154,17 @@ class PositionController extends Controller
     public function resubordinateEmployees(ChangePositionRequest $request)
     {
         $validated = $request->validated();
+
+        $employees = Employee::where('position_id', request('id'))->get();
+        //must change to map
+        foreach($employees as $employee) {
+            $employee->position_id = request('siblingsPosition');
+            $employee->update();
+        }
+
+        //Position::destroy(request('id'));
+        return redirect()->route('positions.index')
+        ->with('success','The Position#'.request('id').' was deleted! All it employees were were resubordinated to Position#'.request('siblingsPosition')); 
        
     }
 }
