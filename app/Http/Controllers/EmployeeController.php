@@ -156,13 +156,8 @@ class EmployeeController extends Controller
 
     public function changeLeader(UpdateLeaderRequest $request): RedirectResponse
     {
-        $subOrdinates = $this->getSubordinates(request('oldLeaderId'));
-        //must change to map
-        foreach($subOrdinates as $subOrdinate) {
-            $subOrdinate->leader_id = request('leaderId');
-            $subOrdinate->update();
-        }
-
+        DB::table('employees')->where('leader_id', request('oldLeaderId'))->update(['leader_id' => request('leaderId')]);
+        
         Employee::destroy(request('oldLeaderId'));
        
         return redirect()->route('employees.index')->with('success','The employee#'.request('oldLeaderId').' was deleted!');
