@@ -23,7 +23,21 @@ if (document.getElementById('employeesCard')) {
                     } else {
                        
                         if (window.confirm('Are You shure to delete the employee?')) {
-                            window.location.href = '/admin/employee/delete?id='+id;
+                                    let fd = new FormData;
+                                    fd.append('_token', CSRF_TOKEN);
+                                    fd.append('_method', 'delete');
+                                    fd.append('id', id);
+
+                                    fetch('/admin/employees/'+id,
+                                    {
+                                        body: fd,
+                                        method: "POST",
+                                        credentials: 'same-origin'
+                                    })
+                                    .then((response) => response.json())
+                                    .then(function(deleteStatus) {
+                                        window.location.href = '/admin/employee/delete?id='+id;
+                                    })
                         }
                       }
                 })

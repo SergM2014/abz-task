@@ -168,11 +168,18 @@ class EmployeeController extends Controller
         return redirect()->route('employees.index')->with('success','The employee#'.request('oldLeaderId').' was deleted!');
     }
 
-    public function delete(): RedirectResponse
+    public function destroy($id): JsonResponse
     {
-        $destroyed = Employee::destroy(request('id'));
+        Employee::destroy(request('id'));
         
+        return response()->json([
+            'message' => 'The Employee#'.request('id').' is deleted', 
+            'success' => true
+        ]);
+    }
+
+    public function delete(): RedirectResponse
+    { 
         return redirect()->route('employees.index')->with('success','The employee#'.request('id').' was deleted!');
     }
-  
 }
