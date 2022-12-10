@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ChangePositionRequest;
 use App\Http\Requests\CreatePositionRequest;
 use App\Http\Requests\UpdatePositionRequest;
 use App\Models\Employee;
@@ -150,5 +151,11 @@ class PositionController extends Controller
         $siblingsPositions = Position::where('subordinary_level', $position->subordinary_level)
                             ->whereNot('id', $position->id)->get();
         return view('admin.positions.preprocess', ['position' => $position, 'employeesNumber' => $employeesNumber, 'siblingsPositions' => $siblingsPositions] );
+    }
+
+    public function resubordinateEmployees(ChangePositionRequest $request)
+    {
+        $validated = $request->validated();
+       
     }
 }
