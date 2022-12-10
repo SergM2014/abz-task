@@ -148,7 +148,20 @@ class PositionController extends Controller
         $employeesNumber = count(Employee::where('position_id', request('id'))->get()); 
         $siblingsPositions = Position::where('subordinary_level', $position->subordinary_level)
                             ->whereNot('id', $position->id)->get();
-        return view('admin.positions.preprocess', ['position' => $position, 'employeesNumber' => $employeesNumber, 'siblingsPositions' => $siblingsPositions] );
+
+
+        $subOrdinaryLevel = ($position->subordinary_level)+1;
+
+        $subPositionsNumber = count(Position::where('subordinary_level', $subOrdinaryLevel)
+                            ->where('parent_id', request('id'))
+                            ->get());                    
+        return view('admin.positions.preprocess', [
+            'position' => $position, 
+            'employeesNumber' => $employeesNumber,
+             'siblingsPositions' => $siblingsPositions,
+             //-----
+             'subPositionsNumber' => $subPositionsNumber
+             ] );
     }
 
     public function resubordinateEmployees(ChangePositionRequest $request)
