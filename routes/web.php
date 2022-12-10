@@ -23,9 +23,10 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('auth');
-Route::get('/admin', function () { return view('admin.dashboard'); })->middleware('auth');
 
 Route::middleware(['auth'])->prefix('admin')->group(function () {
+
+    Route::get('/', function () { return view('admin.dashboard'); });
   
     Route::resource('employees', EmployeeController::class);
 
