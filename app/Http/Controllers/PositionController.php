@@ -154,13 +154,42 @@ class PositionController extends Controller
 
         $subPositionsNumber = count(Position::where('subordinary_level', $subOrdinaryLevel)
                             ->where('parent_id', request('id'))
-                            ->get());                    
+                            ->get());    
+                            
+        if(request('employees')) {
+            $route = route('positions.employees.resubordinate');
+            $disclaimer = "The current Position contains  $employeesNumber  employee(s).";
+            $selectTitle = "Choose another position to resubordinate employee(s)";
+            $submitBtnTitle = "Resubordinate employees and delete current position";  
+        }
+        if(request('subpositions')) {
+            $route = route('positions.siblings.change');
+            $disclaimer = "The current Position contains  $subPositionsNumber subposition(s)";
+            $selectTitle = "Change for another siblings position to resubordinate subposition(s)";
+            $submitBtnTitle = "Choose sibling position and delete the current one";  
+        }
+        if(request('subpositions') AND request('employees')) {
+            $route = route('positions.reorder.full');
+            $disclaimer = "The current Position contains  $subPositionsNumber subposition(s) and  $employeesNumber  employee(s).";
+            $submitBtnTitle = "Choose sibling position and to resubordinate employee(s) and delete the current Position";
+            $selectTitle = "Change for another siblings position to resubordinate subposition(s) and employee(s)";  
+        }
+                            
+
+
+
         return view('admin.positions.preprocess', [
+            'route' => $route,
+            'submitBtnTitle' => $submitBtnTitle,
+            'selectTitle' => $selectTitle,
+            'disclaimer' => $disclaimer,
             'position' => $position, 
-            'employeesNumber' => $employeesNumber,
+
+            //____________________
+            //'employeesNumber' => $employeesNumber,
              'siblingsPositions' => $siblingsPositions,
              //-----
-             'subPositionsNumber' => $subPositionsNumber
+            // 'subPositionsNumber' => $subPositionsNumber
              ] );
     }
 
