@@ -149,7 +149,6 @@ class PositionController extends Controller
         $siblingsPositions = Position::where('subordinary_level', $position->subordinary_level)
                             ->whereNot('id', $position->id)->get();
 
-
         $subOrdinaryLevel = ($position->subordinary_level)+1;
 
         $subPositionsNumber = count(Position::where('subordinary_level', $subOrdinaryLevel)
@@ -169,14 +168,11 @@ class PositionController extends Controller
             $submitBtnTitle = "Choose sibling position and delete the current one";  
         }
         if(request('subpositions') AND request('employees')) {
-            $route = route('positions.reorder.full');
+            $route = route('positions.rearange');
             $disclaimer = "The current Position contains  $subPositionsNumber subposition(s) and  $employeesNumber  employee(s).";
-            $submitBtnTitle = "Choose sibling position and to resubordinate employee(s) and delete the current Position";
+            $submitBtnTitle = "Change for another sibling position and to resubordinate employee(s) and delete the current Position";
             $selectTitle = "Change for another siblings position to resubordinate subposition(s) and employee(s)";  
         }
-                            
-
-
 
         return view('admin.positions.preprocess', [
             'route' => $route,
@@ -185,11 +181,7 @@ class PositionController extends Controller
             'disclaimer' => $disclaimer,
             'position' => $position, 
 
-            //____________________
-            //'employeesNumber' => $employeesNumber,
-             'siblingsPositions' => $siblingsPositions,
-             //-----
-            // 'subPositionsNumber' => $subPositionsNumber
+            'siblingsPositions' => $siblingsPositions,
              ] );
     }
 
