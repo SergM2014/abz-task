@@ -26,8 +26,9 @@ class ImageController extends Controller
 
              $image = $request->file('image');
              $extension = $image->getClientOriginalExtension();
-           //   $fileName = time().'.'.$extension;
-             $fileName = 'photo_'.time().'.jpg';
+          
+             $hashed = md5(time());
+             $fileName = 'photo_'.$hashed.'.jpg';
              $destinationPath = storage_path('app/public/uploads/thumbs');
              $savedFile = $destinationPath.'/'.$fileName;
              $img = Image::make($image->getRealPath());
