@@ -27,7 +27,7 @@ class EmployeeFactory extends Factory
             'phone' => fake()->unique()->phoneNumber(),
             'email' => fake()->unique()->email(),
             'salary' => fake()->randomFloat($nbMaxDecimals = 3, $min = 0, $max = 500.000),
-            'photo' => 'no-avatar.jpg',
+            'photo' => 'no-avatar.png',
             'created_at' => fake()->dateTimeBetween('-10 day'),
             'updated_at' => fake()->dateTimeBetween('-5 day'),
         ];
