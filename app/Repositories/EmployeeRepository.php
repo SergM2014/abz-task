@@ -30,4 +30,21 @@ class EmployeeRepository implements EmployeeInterface
     {
         return Employee::findOrFail($id);
     }
+
+    public function update(Request $request, array $validated, int $id): void
+    {
+        $employee = Employee::find($id);
+        $employee-> first_name = $validated['firstName'];
+        $employee-> middle_name = $validated['middleName']?? null;
+        $employee-> last_name = $validated['lastName'];
+        $employee->position_id = $validated['positionId'];
+        $employee->leader_id = $validated['leaderId'];
+        $employee->employment_date = $validated['employmentDate'];
+        $employee->phone = $validated['phone'];
+        $employee->email = $validated['email'];
+        $employee->salary = $validated['salary'];
+        $employee->photo = request('photo')? : null;
+        $employee->admin_updated_id = $request->user()->id;
+        $employee->save();
+    }
 }

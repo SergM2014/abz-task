@@ -10,4 +10,6 @@ interface EmployeeInterface
     public function store(Request $request, array $valideted): void;
 
     public function getById(int $id): Employee;
+
+    public function update(Request $request, array $valideted, int $id): void;
 }
