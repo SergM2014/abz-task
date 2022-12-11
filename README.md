@@ -16,7 +16,14 @@ How to install on Ubuntu, follow the next steps:
 
 7) php artisan migrate --seed
 
-(!!! the last item needs long time, in my case it took 15 mins!!!)
+(!!! this item needs long time, in my case it took 15 mins!!!)
+
+8) php artisan storage:link
+
+9) npm install
+
+10) npm run build
+
 
 visit http://localhost 
 
