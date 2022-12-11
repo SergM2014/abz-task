@@ -38,7 +38,7 @@ class PositionsTable extends AbstractTableConfiguration
             Column::make('created_at')->title('created at')->format(new DateFormatter('d/m/Y H:i'))->sortable(),
             Column::make('updated_at')->title('updated at')->format(new DateFormatter('d/m/Y H:i'))->sortable()->sortByDefault('desc'),
             Column::make('admin_created_id')->title('created by admin')->sortable(),
-            Column::make('admin_updated_id')->title('updated by admin')->sortable()->sortByDefault('desc'),
+            Column::make('admin_updated_id')->title('updated by admin')->sortable(),
         ];
     }
 
