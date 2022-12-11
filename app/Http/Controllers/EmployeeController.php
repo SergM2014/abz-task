@@ -17,10 +17,8 @@ use Illuminate\View\View;
 
 class EmployeeController extends Controller
 {
-    public function __construct(private EmployeeInterface $employeeRepository)
-    {
-        
-    }
+    public function __construct(private EmployeeInterface $employeeRepository) {}
+
     public function index(): View
     {
         return view('admin.employees.index');
@@ -28,7 +26,7 @@ class EmployeeController extends Controller
 
     public function create(): View
     {
-        $positions = Position::all('id', 'title');
+        $positions = $this->employeeRepository->getAllPositions();
        
         return view('admin.employees.create', ['positions' => $positions]);
     }
