@@ -15,4 +15,6 @@ interface EmployeeInterface
     public function update(Request $request, array $valideted, int $id): void;
 
     public function search(Request $request, int $superiorId): Collection;
+
+    public function getLeader(): Employee;
 }

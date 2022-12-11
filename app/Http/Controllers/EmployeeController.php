@@ -88,9 +88,10 @@ class EmployeeController extends Controller
             return response()->json(['id' => 0, 'text' => 'it is the highest hierachical level! No suprem positions at all!']);
         }
 
-        $leader = Employee::where('id', request('leaderId'))
-                ->first(['id', DB::raw("CONCAT(first_name, ' ', middle_name ,' ', last_name) as text")]);
-
+        // $leader = Employee::where('id', request('leaderId'))
+        //         ->first(['id', DB::raw("CONCAT(first_name, ' ', middle_name ,' ', last_name) as text")]);
+        $leader = $this->employeeRepository->getLeader();
+        
          return response()->json(['id' => $leader->id, 'text' => $leader->text]);
     }
 

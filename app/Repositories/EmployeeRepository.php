@@ -56,4 +56,10 @@ class EmployeeRepository implements EmployeeInterface
                     ->where('position_id', $superiorId)
                     ->get(['id', DB::raw("CONCAT(first_name, ' ', middle_name ,' ', last_name) as text")]);
     }
+
+    public function getLeader(): Employee
+    {
+        return  Employee::where('id', request('leaderId'))
+        ->first(['id', DB::raw("CONCAT(first_name, ' ', middle_name ,' ', last_name) as text")])
+    }
 }
