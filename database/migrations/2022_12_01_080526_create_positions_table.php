@@ -22,7 +22,7 @@ return new class extends Migration
             $table->integer('admin_created_id')->nullable();
             $table->integer('admin_updated_id')->nullable();
             $table->timestamps();
-            $table->index(['title', 'description']);
+            $table->index(['title']);
         });
     }
 
