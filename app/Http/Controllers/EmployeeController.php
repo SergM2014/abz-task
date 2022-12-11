@@ -6,6 +6,7 @@ use App\Http\Requests\StoreEmployeeRequest;
 use App\Http\Requests\UpdateEmployeeRequest;
 use App\Http\Requests\UpdateLeaderRequest;
 use App\Interfaces\EmployeeInterface;
+use App\Interfaces\PositionInterface;
 use Illuminate\Http\Request;
 use App\Models\Employee;
 use App\Models\Position;
@@ -17,7 +18,10 @@ use Illuminate\View\View;
 
 class EmployeeController extends Controller
 {
-    public function __construct(private EmployeeInterface $employeeRepository) {}
+    public function __construct(
+        private EmployeeInterface $employeeRepository,
+        private PositionInterface $positionRepository
+        ) {}
 
     public function index(): View
     {

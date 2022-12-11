@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use App\Interfaces\EmployeeInterface;
 use App\Repositories\EmployeeRepository;
+use App\Interfaces\PositionInterface;
+use App\Repositories\PositionRepository;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -16,6 +18,7 @@ class RepositoryServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(EmployeeInterface::class, EmployeeRepository::class);
+        $this->app->bind(PositionInterface::class, PositionRepository::class);
     }
 
     /**
