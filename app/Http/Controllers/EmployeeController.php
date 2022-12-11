@@ -88,10 +88,8 @@ class EmployeeController extends Controller
             return response()->json(['id' => 0, 'text' => 'it is the highest hierachical level! No suprem positions at all!']);
         }
 
-        // $leader = Employee::where('id', request('leaderId'))
-        //         ->first(['id', DB::raw("CONCAT(first_name, ' ', middle_name ,' ', last_name) as text")]);
         $leader = $this->employeeRepository->getLeader();
-        
+
          return response()->json(['id' => $leader->id, 'text' => $leader->text]);
     }
 
@@ -106,7 +104,8 @@ class EmployeeController extends Controller
     public function getSubordinates( $id = null): Collection
     {
         $id = $id?? request('id');
-        $subOrdinates = Employee::where('leader_id', $id)->get();
+       
+        $subOrdinates = $this->employeeRepository->getSubordinates($id);
 
         return $subOrdinates;
     }
@@ -116,42 +115,37 @@ class EmployeeController extends Controller
         $subOrdinates = $this->getSubordinates();
 
         if(count($subOrdinates) < 1) {
-            Employee::destroy(request('oldLeaderId'));
-            return redirect()->route('employees.index')->with('success','The employee#'.request('id').' was deleted!'); 
+          
+           $this->employeeRepository->delete();
+           return redirect()->route('employees.index')->with('success','The employee#'.request('id').' was deleted!'); 
         }
 
-        $leader = Employee::with('position')->find(request('id'));
+        $leader = $this->employeeRepository->getLeaderWithPosition();
 
-        $siblingsNumber =  count(Employee::where('position_id', $leader->position_id)
-                            ->whereNot('id',  $leader->id)
-                            ->get() );
+        $siblingsNumber = $this->employeeRepository->getSiblingsNumber($leader->position_id, $leader->id);
 
         return view('admin.employees.changeLeader', ['leader' => $leader, 'subOrdinates' => $subOrdinates, 'siblingsNumber' => $siblingsNumber]);
     }
 
     public function searchLeaders(Request $request): array
     {
-        $employees = Employee::where('last_name', 'LIKE', '%'.$request->input('term', '').'%')
-                    ->where('position_id', $request->input('positionId'))
-                    ->whereNot('id',  $request->input('id'))
-                    ->get(['id', DB::raw("CONCAT(first_name, ' ', middle_name ,' ', last_name) as text")]);
+        $employees = $this->employeeRepository->searchLeaders($request);
 
         return ['results' => $employees];
     }
 
     public function changeLeader(UpdateLeaderRequest $request): RedirectResponse
     {
-        DB::table('employees')->where('leader_id', request('oldLeaderId'))->update(['leader_id' => request('leaderId')]);
+        $this->employeeRepository->changeLeader();
         
-        Employee::destroy(request('oldLeaderId'));
+        $this->employeeRepository->delete();
        
         return redirect()->route('employees.index')->with('success','The employee#'.request('oldLeaderId').' was deleted!');
     }
 
     public function destroy($id): JsonResponse
-    {
-        Employee::destroy(request('id'));
-        
+    {     
+        $this->employeeRepository->deleteById();
         return response()->json([
             'message' => 'The Employee#'.request('id').' is deleted', 
             'success' => true

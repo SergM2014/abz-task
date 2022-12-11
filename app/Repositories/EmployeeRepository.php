@@ -60,6 +60,46 @@ class EmployeeRepository implements EmployeeInterface
     public function getLeader(): Employee
     {
         return  Employee::where('id', request('leaderId'))
-        ->first(['id', DB::raw("CONCAT(first_name, ' ', middle_name ,' ', last_name) as text")])
+        ->first(['id', DB::raw("CONCAT(first_name, ' ', middle_name ,' ', last_name) as text")]);
+    }
+
+    public function getSubordinates(int $id): Collection
+    {
+        return Employee::where('leader_id', $id)->get();
+    }
+
+    public function delete(): void
+    {
+        Employee::destroy(request('oldLeaderId'));
+    }
+
+    public function getLeaderWithPosition(): Employee
+    {
+        return Employee::with('position')->find(request('id'));
+    }
+
+    public function getSiblingsNumber($positionId, $leaderId): int
+    {
+        return count(Employee::where('position_id', $positionId)
+        ->whereNot('id',  $leaderId)
+        ->get() );
+    }
+
+    public function searchLeaders(Request $request): array
+    {
+       return Employee::where('last_name', 'LIKE', '%'.$request->input('term', '').'%')
+                    ->where('position_id', $request->input('positionId'))
+                    ->whereNot('id',  $request->input('id'))
+                    ->get(['id', DB::raw("CONCAT(first_name, ' ', middle_name ,' ', last_name) as text")]);
+    }
+
+    public function changeLeader(): void
+    {
+        DB::table('employees')->where('leader_id', request('oldLeaderId'))->update(['leader_id' => request('leaderId')]);
+    }
+
+    public function deleteById(): void
+    {
+        Employee::destroy(request('id'));
     }
 }
