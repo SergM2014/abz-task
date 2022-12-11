@@ -44,13 +44,11 @@ class PositionController extends Controller
         $subordinaryLevels = $this->positionRepository->getSubordinaryLevels();
         $position = $this->positionRepository->getById($id);
         $subordinaryLevel = old('subordinaryLevel')?? $position->subordinary_level;
-        $supremePositionIdSelect = old('supremePositionIdSelect')?? $position->parent_id;
 
         return view('admin.positions.update', [
             'position' => $position,
             'subordinaryLevels' => $subordinaryLevels,
             'subordinaryLevel' => $subordinaryLevel,
-            'supremePositionIdSelect' => $supremePositionIdSelect 
             ]);
     }
 

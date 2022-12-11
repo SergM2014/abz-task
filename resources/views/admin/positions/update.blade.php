@@ -34,7 +34,7 @@
   
   <div class="form-group">
     <label for="supremePositionIdSelect">Supreme position select</label>
-    <input type="hidden"  id="supremePositionId" value="{{ $supremePositionIdSelect }}" >
+    <input type="hidden"  id="supremePositionId" value="{{ Arr::has(old(), 'supremePositionIdSelect')? old('supremePositionIdSelect') : $position->parent_id }}" >
     <select name="supremePositionIdSelect" id="supremePositionIdSelect" class="form-control <?= $errors->has('supremePositionIdSelect')? 'is-invalid' : '' ?> select2" ></select>
     <div class="invalid-feedback"><?= $errors->first('supremePositionIdSelect') ?></div>
   </div>
@@ -44,5 +44,4 @@
   </div>
 </form>                   
                 
-
   @endsection
