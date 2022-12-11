@@ -81,8 +81,8 @@ class EmployeeRepository implements EmployeeInterface
     public function getSiblingsNumber($positionId, $leaderId): int
     {
         return count(Employee::where('position_id', $positionId)
-        ->whereNot('id',  $leaderId)
-        ->get() );
+            ->whereNot('id',  $leaderId)
+            ->get() );
     }
 
     public function searchLeaders(Request $request): array
@@ -101,5 +101,16 @@ class EmployeeRepository implements EmployeeInterface
     public function deleteById(): void
     {
         Employee::destroy(request('id'));
+    }
+
+    public function getEmployeesByPositionId(): Collection
+    {
+        //return Employee::where('position_id', request('id'))->get();
+        return DB::table('employees')->where('position_id', request('id'))->get();
+    }
+
+    public function changePosition(): void
+    {
+        DB::table('employees')->where('position_id', request('id'))->update(['position_id' => request('siblingsPosition')]);
     }
 }

@@ -31,4 +31,8 @@ interface EmployeeInterface
     public function changeLeader(): void;
 
     public function deleteById(): void;
+
+    public function getEmployeesByPositionId(): Collection;
+
+    public function changePosition(): void;
 }
