@@ -77,9 +77,7 @@ class EmployeeController extends Controller
                     ];
         }
 
-        $employees = Employee::where('last_name', 'LIKE', '%'.$request->input('term', '').'%')
-                    ->where('position_id', $superiorId)
-                    ->get(['id', DB::raw("CONCAT(first_name, ' ', middle_name ,' ', last_name) as text")]);
+        $employees = $this->employeeRepository->search($request, $superiorId);
 
         return ['results' => $employees];
     }

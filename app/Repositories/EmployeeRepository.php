@@ -6,6 +6,8 @@ use App\Interfaces\EmployeeInterface;
 use App\Models\Employee;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Collection as SupportCollection;
+use Illuminate\Support\Facades\DB;
 
 class EmployeeRepository implements EmployeeInterface
 {
@@ -46,5 +48,12 @@ class EmployeeRepository implements EmployeeInterface
         $employee->photo = request('photo')? : null;
         $employee->admin_updated_id = $request->user()->id;
         $employee->save();
+    }
+
+    public function search(Request $request, int $superiorId): SupportCollection
+    {
+        return Employee::where('last_name', 'LIKE', '%'.$request->input('term', '').'%')
+                    ->where('position_id', $superiorId)
+                    ->get(['id', DB::raw("CONCAT(first_name, ' ', middle_name ,' ', last_name) as text")]);
     }
 }
