@@ -2,9 +2,9 @@
 
 namespace App\Repositories;
 
-use App\Interfaces\Employee as InterfacesEmployee;
+use App\Interfaces\EmployeeInterface;
 
-class Employee implements InterfacesEmployee
+class EmployeeRepository implements EmployeeInterface
 {
 
 }

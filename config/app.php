@@ -198,7 +198,8 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         Intervention\Image\ImageServiceProvider::class,
-        App\Providers\ViewServiceProvider::class
+        App\Providers\ViewServiceProvider::class,
+        App\Providers\RepositoryServiceProvider::class,
 
     ],
 
