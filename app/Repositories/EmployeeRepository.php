@@ -103,7 +103,7 @@ class EmployeeRepository implements EmployeeInterface
         Employee::destroy(request('id'));
     }
 
-    public function getEmployeesByPositionId(): Collection
+    public function getEmployeesByPositionId(): SupportCollection
     {
         //return Employee::where('position_id', request('id'))->get();
         return DB::table('employees')->where('position_id', request('id'))->get();

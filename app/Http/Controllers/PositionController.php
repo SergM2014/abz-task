@@ -114,7 +114,8 @@ class PositionController extends Controller
     public function getSubPositions():JsonResponse
     {    
         //if (Position::where('parent_id', request('id'))->first()) {
-        if ($this->positionRepository->getSubPositions()) {
+        // if ($this->positionRepository->getSubPositions()) {
+            if (count($this->positionRepository->getSubPositions())) {
             return response()->json([
                 'message' => 'Attention! Position has  subposition(s)', 
                 'success' => false
@@ -129,7 +130,8 @@ class PositionController extends Controller
     public function getEmployees(): JsonResponse
     {
         // if(Employee::where('position_id', request('id'))->first()) {
-            if($this->employeeRepository->getEmployeesByPositionId()) {
+            // if($this->employeeRepository->getEmployeesByPositionId()) {
+            if(count($this->employeeRepository->getEmployeesByPositionId())) {
             return response()->json([
                 'message' => 'Attention! Position has employee(s)', 
                 'success' => false
@@ -213,7 +215,7 @@ class PositionController extends Controller
         $this->positionRepository->changeUpperPosition();
         //Position::destroy(request('id'));
         //$this->positionRepository->delete(request('id'));
-        
+
         return redirect()->route('positions.index')
         ->with('success','The Position#'.request('id').' was deleted! All it subposition(s) and employee(s) were were resubordinated to Position#'.request('siblingsPosition')); 
     }

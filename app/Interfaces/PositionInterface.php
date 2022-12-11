@@ -14,7 +14,7 @@ interface PositionInterface
 
     public function getById(int $id): Position;
 
-    public function getSubordinaryLevels(): array;
+    public function getSubordinaryLevels(): SupportCollection;
 
     public function store(CreatePositionRequest $request, array $validated): void;
 

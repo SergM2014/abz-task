@@ -9,7 +9,6 @@ use App\Http\Requests\CreatePositionRequest;
 use App\Http\Requests\UpdatePositionRequest;
 use Illuminate\Support\Collection as SupportCollection;
 use Illuminate\Support\Facades\DB;
-use Livewire\Features\SupportCollections;
 
 class PositionRepository implements PositionInterface
 {
@@ -18,12 +17,12 @@ class PositionRepository implements PositionInterface
         return Position::all('id', 'title');
     }
 
-    public function getById(int $id): Position
-    {
+public function getById(int $id): Position
+{
         return Position::find($id);
     }
 
-    public function getSubordinaryLevels(): array
+    public function getSubordinaryLevels(): SupportCollection
     {
         return Position::groupBy('subordinary_level')->pluck('subordinary_level');
     }

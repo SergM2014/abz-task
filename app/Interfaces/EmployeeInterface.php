@@ -5,6 +5,7 @@ namespace App\Interfaces;
 use App\Models\Employee;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
+use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 
 interface EmployeeInterface
 {

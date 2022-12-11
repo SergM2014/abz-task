@@ -42,7 +42,7 @@
   </div>
  
   <div class="text-center">
-    <button type="submit" class="btn btn-primary mb-2 btn-lg">Create a new User</button>
+    <button type="submit" class="btn btn-primary mb-2 btn-lg">Create a new Position</button>
   </div>
 </form>                   
                 
