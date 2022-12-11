@@ -30,7 +30,7 @@ class EmployeeController extends Controller
 
     public function create(): View
     {
-        $positions = $this->employeeRepository->getAllPositions();
+        $positions = $this->positionRepository->getAll();
        
         return view('admin.employees.create', ['positions' => $positions]);
     }
