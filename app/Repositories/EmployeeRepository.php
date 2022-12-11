@@ -105,7 +105,6 @@ class EmployeeRepository implements EmployeeInterface
 
     public function getEmployeesByPositionId(): SupportCollection
     {
-        //return Employee::where('position_id', request('id'))->get();
         return DB::table('employees')->where('position_id', request('id'))->get();
     }
 

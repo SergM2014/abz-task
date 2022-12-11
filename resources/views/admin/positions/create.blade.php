@@ -36,7 +36,7 @@
   
   <div class="form-group">
     <label for="supremePositionIdSelect">Supreme position select</label>
-    <input type="hidden"  id="supremePositionId" value="{{ old('supremePositionId') }}" >
+    <input type="hidden"  id="supremePositionId" value="{{ old('supremePositionIdSelect') }}" >
     <select name="supremePositionIdSelect" id="supremePositionIdSelect" class="form-control <?= $errors->has('supremePositionIdSelect')? 'is-invalid' : '' ?> select2" ></select>
     <div class="invalid-feedback"><?= $errors->first('supremePositionIdSelect') ?></div>
   </div>

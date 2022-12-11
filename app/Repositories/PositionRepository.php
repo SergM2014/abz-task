@@ -41,7 +41,6 @@ public function getById(int $id): Position
 
     public function update(UpdatePositionRequest $request, array $validated, int $id): void
     {
-        //$position = Position::find($id);
         $position = $this->getById($id);
         $position->subordinary_level = $validated['subordinaryLevel'];
         $position->title = $validated['title'];
@@ -64,7 +63,6 @@ public function getById(int $id): Position
 
     public function getSubPositions(): SupportCollection
     {
-        //Position::where('parent_id', request('id'))->first();
         return DB::table('positions')->where('parent_id', request('id'))->get();
     }
 
