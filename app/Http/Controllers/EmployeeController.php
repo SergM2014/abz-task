@@ -46,8 +46,8 @@ class EmployeeController extends Controller
 
     public function edit($id): View
     {
-        $employee = Employee::findOrFail($id);
-        $positions = Position::all('id', 'title');
+        $employee = $this->employeeRepository->getById($id);
+        $positions = $this->positionRepository->getAll();
         $positionId = \old('positionId')?? $employee->position_id;
         return view('admin.employees.edit', [
             'employee' => $employee, 

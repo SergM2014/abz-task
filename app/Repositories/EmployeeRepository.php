@@ -25,4 +25,9 @@ class EmployeeRepository implements EmployeeInterface
         $employee->admin_created_id = $request->user()->id;
         $employee->save();
     }
+
+    public function getById(int $id): Employee
+    {
+        return Employee::findOrFail($id);
+    }
 }
